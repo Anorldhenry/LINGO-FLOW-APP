@@ -512,7 +512,7 @@ function LessonContent() {
            <X className="h-6 w-6" />
         </button>
         <button 
-          onClick={() => { console.log("Manual Sound Test Initiated"); beep(880, 200); playSound('click'); }}
+          onClick={() => { console.log("Manual Sound Test Initiated"); playSound('click'); }}
           className="text-[10px] font-black uppercase tracking-widest px-3 py-1 bg-surface-hover text-bold border-2 border-border-color rounded-lg hover:bg-surface hover:text-[#58CC02] transition-all"
         >
           🔊 Test Speakers
