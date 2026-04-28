@@ -10,6 +10,8 @@ create table profiles (
   last_lesson_lang text,
   last_lesson_module text,
   last_lesson_index integer default 0,
+  subscription_tier text default 'free',
+  subscription_expiry timestamp with time zone,
 
   constraint full_name_length check (char_length(full_name) >= 2)
 );

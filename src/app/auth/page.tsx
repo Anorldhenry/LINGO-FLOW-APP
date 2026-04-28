@@ -26,12 +26,18 @@ export default function AuthPage() {
     
     try {
       if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({
+        const { error, data } = await supabase.auth.signInWithPassword({
           email: internalEmail,
           password
         })
         if (error) throw error
-        router.push('/dashboard')
+        
+        // Ensure session is recognized before redirecting
+        if (data.session) {
+           console.log("Login successful, preparing dashboard...")
+           // Using window.location.href for a clean, forced refresh to avoid Next.js middleware desync
+           window.location.href = '/dashboard'
+        }
       } else {
         const { data, error } = await supabase.auth.signUp({
           email: internalEmail,
@@ -44,15 +50,19 @@ export default function AuthPage() {
         })
         if (error) throw error
         
-        // Redirect directly as we've disabled confirmation requirements in the logic
-        router.push('/dashboard')
+        if (data.user) {
+           console.log("Signup successful, entering dashboard...")
+           window.location.href = '/dashboard'
+        }
       }
     } catch (err: any) {
       setError(err.message === 'Invalid login credentials' 
         ? 'Invalid username or password.' 
         : err.message || 'An error occurred during authentication')
     } finally {
-      setIsLoading(false)
+      // We don't necessarily clear loading if we are redirecting
+      // but we do it if there was an error
+      if (error) setIsLoading(false)
     }
   }
 
@@ -61,8 +71,9 @@ export default function AuthPage() {
       
       {/* Top Header */}
       <header className="h-16 flex items-center px-6">
-        <Link href="/" className="text-bold hover:text-foreground transition-colors">
+        <Link href="/" className="text-bold hover:text-foreground transition-colors flex items-center gap-2">
           <ArrowLeft className="h-6 w-6" />
+          <img src="/assets/logo-transparent.png" alt="Logo" className="h-6 w-auto" />
         </Link>
       </header>
 
@@ -71,6 +82,9 @@ export default function AuthPage() {
         <div className="w-full max-w-md bg-surface rounded-[32px] p-8 shadow-sm border-2 border-border-color">
           
           <div className="mb-8 text-center">
+            <div className="inline-flex items-center justify-center w-20 h-20 mb-4 overflow-hidden rounded-2xl bg-surface-hover border-2 border-border-color p-2 shadow-sm">
+               <img src="/assets/logo-transparent.png" className="w-full h-full object-contain" alt="Lingo Flow" />
+            </div>
             <h1 className="text-3xl font-extrabold text-foreground mb-2">{isLogin ? 'Welcome Back' : 'Create Account'}</h1>
             <p className="text-bold font-bold">
               {isLogin ? 'Sign in with your username' : 'Pick a username and password'}

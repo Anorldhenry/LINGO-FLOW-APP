@@ -25,20 +25,20 @@
 }
 
 .dark {
-  --background: #0f1115;
-  --foreground: #F0F4F8;
-  --surface: #1e2128;
-  --surface-hover: #2a2d35;
-  --border-color: #333333;
-  --border-b-color: #222222;
-  --text-muted: #AFAFBC;
-  --text-bold: #777777;
+  --background: #09090b;
+  --foreground: #fafafa;
+  --surface: #18181b;
+  --surface-hover: #27272a;
+  --border-color: #3f3f46;
+  --border-b-color: #27272a;
+  --text-muted: #a1a1aa;
+  --text-bold: #d4d4d8;
 
-  --error-bg: #4a191b;
-  --success-bg: #1f3d13;
-  --warning-bg: #4a3e0b;
-  --info-bg: #0b344b;
-  --info-hover: #08283a;
+  --error-bg: #3f1619;
+  --success-bg: #143015;
+  --warning-bg: #41320d;
+  --info-bg: #0c2b42;
+  --info-hover: #0a2133;
 
   --primary: #58CC02;
   --primary-hover: #46A302;

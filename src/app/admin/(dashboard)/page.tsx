@@ -16,6 +16,8 @@ export default async function AdminOverview() {
   // Pre-seed language counts so all platforms show up in the UI even with 0 users
   const initialLanguages: Record<string, number> = {
     'Arabic': 0,
+    'German': 0,
+    'French': 0,
     'Runyankore': 0,
     'Kiswahili': 0,
     'Luganda': 0

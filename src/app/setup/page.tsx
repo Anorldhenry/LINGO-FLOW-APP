@@ -7,6 +7,8 @@ import { Check, Loader2, ArrowLeft } from 'lucide-react'
 
 const LANGUAGES = [
   { id: 'arabic', name: 'Arabic', flag: '🇦🇪', color: 'from-blue-400 to-blue-600', border: 'border-blue-600', bg: 'bg-blue-50' },
+  { id: 'german', name: 'German', flag: '🇩🇪', color: 'from-red-400 to-red-600', border: 'border-red-600', bg: 'bg-red-50' },
+  { id: 'french', name: 'French', flag: '🇫🇷', color: 'from-indigo-400 to-indigo-600', border: 'border-indigo-600', bg: 'bg-indigo-50' },
   { id: 'runyankore', name: 'Runyankore', flag: '🇺🇬', color: 'from-orange-400 to-orange-600', border: 'border-orange-600', bg: 'bg-orange-50' },
   { id: 'kiswahili', name: 'Kiswahili', flag: '🇰🇪', color: 'from-emerald-400 to-emerald-600', border: 'border-emerald-600', bg: 'bg-emerald-50' },
   { id: 'luganda', name: 'Luganda', flag: '🇺🇬', color: 'from-yellow-400 to-yellow-600', border: 'border-yellow-600', bg: 'bg-yellow-50' },
@@ -54,7 +56,7 @@ function SetupContent() {
   }
 
   return (
-    <div className="min-h-screen bg-surface flex flex-col items-center justify-center p-6 text-center">
+    <div className="min-h-screen bg-surface flex flex-col items-center justify-center p-4 text-center">
       
       {/* Top Navigation for Settings Source */}
       {isFromSettings && (
@@ -67,14 +69,17 @@ function SetupContent() {
       )}
 
       <div className="w-full max-w-2xl">
+        <div className="flex justify-center mb-6">
+           <img src="/assets/logo-transparent.png" alt="Logo" className="h-16 w-auto" />
+        </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-foreground mb-4">
           {isFromSettings ? 'Switch Language' : 'What do you want to learn?'}
         </h1>
-        <p className="text-lg text-bold font-bold mb-12">
+        <p className="text-lg text-bold font-bold mb-8">
           {isFromSettings ? 'Choose a new language to start practicing!' : 'Choose a language to start your journey.'}
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {LANGUAGES.map((lang) => {
             const isSelected = selected === lang.name
 
@@ -83,8 +88,8 @@ function SetupContent() {
                 key={lang.id}
                 onClick={() => setSelected(lang.name)}
                 className={`
-                  relative flex flex-col items-center justify-center p-8 rounded-3xl border-2 transition-all duration-200
-                  ${isSelected ? `border-[#58CC02] bg-info-bg border-b-[6px]` : `border-border-color border-b-[6px] hover:bg-surface-hover`}
+                  relative flex flex-col items-center justify-center p-6 rounded-2xl border-2 transition-all duration-200
+                  ${isSelected ? `border-[#58CC02] bg-info-bg border-b-[4px]` : `border-border-color border-b-[4px] hover:bg-surface-hover`}
                   active:border-b-2 active:translate-y-1
                 `}
               >
@@ -102,7 +107,7 @@ function SetupContent() {
           })}
         </div>
 
-        <div className="w-full border-t-2 border-border-color pt-8 flex justify-center">
+        <div className="w-full border-t-2 border-border-color pt-6 flex justify-center">
           <button
             onClick={handleContinue}
             disabled={!selected || isLoading}

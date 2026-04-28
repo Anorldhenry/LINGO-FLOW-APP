@@ -2,17 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 const replacements = {
-    "#1CB0F6": "#58CC02", // Sky Blue -> Lingo Green
-    "#1899D6": "#46A302", // Darker Blue -> Darker Green
-    "#1483C2": "#357B00", // Darkest Blue -> Darkest Green
-    "text-[#1CB0F6]": "text-primary",
-    "bg-[#1CB0F6]": "bg-primary",
-    "hover:bg-[#1899D6]": "hover:bg-primary-hover",
-    "border-[#1CB0F6]": "border-primary",
-    "border-[#1483C2]": "border-primary-border",
-    "hover:border-[#1CB0F6]": "hover:border-primary",
-    "focus:border-[#1CB0F6]": "focus:border-primary",
-    "group-hover:text-[#1CB0F6]": "group-hover:text-primary"
+    "#75FC64": "#58CC02", // New Neon -> Old Classic
+    "#5FE64F": "#46A302", // New Hover -> Old Hover
+    "#49D13B": "#357B00", // New Border -> Old Border
 };
 
 function walkSync(dir, filelist = []) {
@@ -27,7 +19,7 @@ function walkSync(dir, filelist = []) {
     return filelist;
 }
 
-const targetFiles = walkSync(path.join(__dirname, 'src')).filter(f => f.endsWith('.tsx'));
+const targetFiles = walkSync(path.join(__dirname, 'src')).filter(f => f.endsWith('.tsx') || f.endsWith('.ts'));
 
 for (const file of targetFiles) {
     if (file.includes('ThemeToggle') || file.includes('theme-provider')) continue;
