@@ -1,8 +1,10 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import { LANGUAGES } from '@/lib/languages'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { LevelTwoList } from '@/components/LevelTwoList'
+import { ProCard } from '@/components/ProCard'
 import { Sparkles, Trophy as TrophyIcon } from 'lucide-react'
 import { LogOut, Flame, Trophy, Shield, Settings, CheckCircle2, Users } from 'lucide-react'
 
@@ -25,7 +27,12 @@ export default async function DashboardPage() {
   }
 
   try {
-    const { data: { user: authUser }, error: authError } = await supabase.auth.getUser()
+    const { data, error: authError } = await Promise.race([
+      supabase.auth.getUser(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Auth Timeout')), 5000))
+    ]) as any
+    
+    const authUser = data?.user
     
     if (authError || !authUser) {
        // If we're strictly checking and it's missing, go to auth
@@ -35,11 +42,14 @@ export default async function DashboardPage() {
       user = authUser
       
       // Fetch profile details with a timeout-like behavior (single query)
-      const { data: dbProfile, error: profileError } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .maybeSingle()
+      const { data: dbProfile, error: profileError } = await Promise.race([
+        supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', user.id)
+          .maybeSingle(),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Profile Timeout')), 5000))
+      ]) as any
         
       if (dbProfile) {
         profile = {
@@ -92,6 +102,9 @@ export default async function DashboardPage() {
   const activeIndex = firstUncompletedIndex === -1 ? modulesList.length - 1 : firstUncompletedIndex;
   const activeModuleId = modulesList[activeIndex].id;
 
+  const currentLangObj = LANGUAGES.find((l) => l.name === profile.target_language) || LANGUAGES[0];
+
+
   return (
     <div className="min-h-screen bg-background font-sans">
       
@@ -108,7 +121,7 @@ export default async function DashboardPage() {
             <div className="hidden lg:flex items-center gap-3 px-4 py-2 bg-surface-hover rounded-2xl border-2 border-border-color group transition-all hover:border-[#58CC02]/30">
               <div className="flex flex-col">
                 <span className="text-[10px] font-bold text-bold uppercase tracking-widest leading-none mb-1">Learning</span>
-                <span className="text-sm font-extrabold text-foreground leading-none">{profile.target_language}</span>
+                <span className="text-sm font-extrabold text-foreground leading-none flex items-center gap-1.5">{currentLangObj.flag} {profile.target_language}</span>
               </div>
               <Link 
                 href="/setup?source=navbar" 
@@ -147,7 +160,7 @@ export default async function DashboardPage() {
           
           {/* Resume Progress Card */}
           {profile.last_lesson_lang && (
-            <div className="bg-surface p-5 rounded-2xl border-2 border-[#58CC02] shadow-sm flex items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-500">
+            <div className="bg-surface p-5 rounded-[32px] border-2 border-[#58CC02] shadow-sm flex items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-500">
                <div className="flex items-center gap-4">
                   <div className="bg-info-bg p-3 rounded-2xl">
                      <Trophy className="h-8 w-8 text-[#58CC02]" />
@@ -166,7 +179,9 @@ export default async function DashboardPage() {
             </div>
           )}
 
-          <div className="bg-[#58CC02] p-6 rounded-3xl border-b-[6px] border-[#46A302] text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm overflow-hidden relative">
+          <div 
+             className="bg-[#58CC02] p-6 rounded-[48px] border-b-[6px] border-[#46A302] text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm overflow-hidden relative"
+          >
             <div className="flex flex-col md:flex-row items-center gap-6 z-10">
               {/* Lingo Baby Mascot Welcome - Polished */}
               <div className="w-20 h-20 md:w-28 md:h-28 flex-shrink-0 animate-float">
@@ -180,7 +195,7 @@ export default async function DashboardPage() {
               <div>
                 <div className="flex items-center gap-3 mb-3">
                   <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/20 rounded-xl text-sm font-bold border-2 border-white/20">
-                    <CheckCircle2 className="h-4 w-4" /> Learning {profile.target_language}
+                    <CheckCircle2 className="h-4 w-4" /> Learning {currentLangObj.flag} {profile.target_language}
                   </div>
                   {profile.subscription_tier && profile.subscription_tier !== 'free' && (
                     <div className="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-xl text-sm font-black border-2 border-yellow-300 shadow-sm animate-pulse-slow">
@@ -192,28 +207,17 @@ export default async function DashboardPage() {
                 <p className="font-medium opacity-90">Ready to crush your daily goals?</p>
               </div>
             </div>
-            <Link href={`/lesson?lang=${profile.target_language}&module=${activeModuleId}`} className="whitespace-nowrap uppercase tracking-widest text-sm font-bold bg-surface text-[#58CC02] hover:bg-surface-hover px-8 py-4 rounded-2xl border-b-4 border-border-color active:border-b-0 active:translate-y-1 transition-all shadow-sm z-10">
+            <Link 
+              href={`/lesson?lang=${profile.target_language}&module=${activeModuleId}`} 
+              className="whitespace-nowrap uppercase tracking-widest text-sm font-bold bg-surface text-[#58CC02] hover:bg-surface-hover px-8 py-4 rounded-2xl border-b-4 border-border-color active:border-b-0 active:translate-y-1 transition-all shadow-sm z-10"
+            >
               Continue: {modulesList[activeIndex].name}
             </Link>
           </div>
 
           {/* New: Upgrade to Pro Card for Free Users */}
-          {(!profile.subscription_tier || profile.subscription_tier === 'free') && (
-            <Link href={`/tutor?lang=${profile.target_language}`} className="bg-gradient-to-br from-zinc-900 to-black p-6 rounded-3xl border-2 border-yellow-500/30 flex items-center justify-between group hover:border-yellow-500/60 transition-all shadow-xl relative overflow-hidden">
-               <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <Sparkles className="h-24 w-24 text-yellow-500" />
-               </div>
-               <div className="z-10">
-                  <h3 className="text-xl font-black text-white flex items-center gap-2">
-                    Upgrade to Lingo Flow Pro 
-                    <span className="bg-yellow-500 text-black text-[10px] px-2 py-0.5 rounded-md">SAVE 50%</span>
-                  </h3>
-                  <p className="text-neutral-400 font-medium text-sm mt-1 max-w-md">Get unlimited AI coaching, ad-free experience, and master languages 3x faster with Coach Lingo.</p>
-                  <div className="mt-4 inline-flex items-center gap-2 text-yellow-500 font-bold text-sm">
-                    View Pricing Plans →
-                  </div>
-               </div>
-            </Link>
+          {(!profile.subscription_tier || profile.subscription_tier === 'free') && user && (
+            <ProCard userId={user.id} />
           )}
 
           {/* Master Celebration Banner */}
@@ -309,7 +313,7 @@ export default async function DashboardPage() {
         <div className="space-y-6">
 
           {/* NEW: Community Hub Widget */}
-          <Link href={`/community?lang=${profile.target_language}`} className="block bg-gradient-to-br from-[#1CB0F6] to-[#1483C2] p-6 rounded-3xl text-white shadow-lg border-b-[6px] border-[#1483C2] hover:scale-[1.02] active:border-b-0 active:translate-y-1 transition-all overflow-hidden relative group">
+          <Link href={`/community?lang=${profile.target_language}`} className="block bg-[#58CC02] p-6 rounded-[40px] text-white shadow-lg border-b-[6px] border-[#357B00] hover:scale-[1.02] active:border-b-0 active:translate-y-1 transition-all overflow-hidden relative group">
              <div className="absolute top-0 right-0 p-6 opacity-20 group-hover:scale-125 transition-transform duration-500">
                 <Users className="h-20 w-20" />
              </div>
@@ -324,7 +328,7 @@ export default async function DashboardPage() {
           </Link>
 
           {/* AI Coach Action Widget */}
-          <Link href={`/tutor?lang=${profile.target_language}`} className="block bg-surface p-5 rounded-2xl border-2 border-border-color shadow-sm border-b-[6px] hover:bg-surface-hover active:border-b-2 active:translate-y-1 transition-all">
+          <Link href={`/tutor?lang=${profile.target_language}`} className="block bg-surface p-5 rounded-[40px] border-2 border-border-color shadow-sm border-b-[6px] hover:bg-surface-hover active:border-b-2 active:translate-y-1 transition-all">
             <div className="flex items-center gap-4 mb-3">
               <div className="w-14 h-14 bg-[#58CC02] rounded-full border-b-4 border-[#357B00] flex items-center justify-center shadow-sm overflow-hidden p-2">
                 <img src="/assets/logo-transparent.png" className="w-full h-full object-contain" alt="Logo" />
@@ -343,14 +347,14 @@ export default async function DashboardPage() {
           </Link>
 
           {/* New: Dedicated Course Progress Widget */}
-          <div className="bg-surface p-5 rounded-2xl border-2 border-border-color shadow-sm">
+          <div className="bg-surface p-5 rounded-[32px] border-2 border-border-color shadow-sm">
             <h3 className="font-extrabold text-foreground text-lg mb-3 flex items-center gap-2">
               <Trophy className="h-5 w-5 text-[#FFC800]" />
               Course Progress
             </h3>
             <div className="space-y-4">
               <div className="flex justify-between items-center text-sm font-bold text-foreground">
-                <span>{profile.target_language}</span>
+                <span className="flex items-center gap-2">{currentLangObj.flag} {profile.target_language}</span>
                 <span>{Math.round((profile.completed_modules.length / modulesList.length) * 100)}%</span>
               </div>
               <div className="w-full bg-surface-hover h-3 rounded-full overflow-hidden border border-border-color">
@@ -371,7 +375,7 @@ export default async function DashboardPage() {
             </div>
           </div>
 
-          <div className="bg-surface p-5 rounded-2xl border-2 border-border-color shadow-sm">
+          <div className="bg-surface p-5 rounded-[32px] border-2 border-border-color shadow-sm">
             <h3 className="font-extrabold text-foreground text-lg mb-3 flex items-center gap-2">
               <Shield className="h-5 w-5 text-[#FFC800] fill-current" />
               Leagues
@@ -385,7 +389,7 @@ export default async function DashboardPage() {
             <p className="text-xs font-bold text-bold mt-2 uppercase tracking-wide text-center">In Bronze League</p>
           </div>
 
-          <div className="bg-surface p-5 rounded-2xl border-2 border-border-color shadow-sm">
+          <div className="bg-surface p-5 rounded-[32px] border-2 border-border-color shadow-sm">
             <h3 className="font-extrabold text-foreground text-lg mb-3 flex items-center gap-2">
               <Settings className="h-5 w-5 text-neutral-400" />
               Account

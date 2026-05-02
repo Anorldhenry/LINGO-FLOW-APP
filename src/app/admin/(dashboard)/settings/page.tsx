@@ -2,13 +2,16 @@
 
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { Save, Loader2, ShieldCheck, KeyRound } from 'lucide-react'
+import { Save, Loader2, ShieldCheck, KeyRound, Eye, EyeOff } from 'lucide-react'
 
 export default function AdminSettingsPage() {
   const supabase = createClient()
   const [currentPassword, setCurrentPassword] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [showCurrent, setShowCurrent] = useState(false)
+  const [showNew, setShowNew] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
 
@@ -93,38 +96,65 @@ export default function AdminSettingsPage() {
           <div className="space-y-4">
             <div className="pb-4 border-b-2 border-[#F7F7F7]">
               <label className="block text-[11px] font-black text-bold uppercase tracking-widest mb-2">Current Password</label>
-              <input
-                type="password"
-                required
-                value={currentPassword}
-                onChange={(e) => setCurrentPassword(e.target.value)}
-                className="w-full bg-surface-hover text-foreground border-2 border-border-color rounded-xl px-4 py-3 font-medium focus:border-[#58CC02] focus:bg-surface focus:outline-none transition-colors"
-                placeholder="Enter current password"
-              />
+              <div className="relative">
+                <input
+                  type={showCurrent ? "text" : "password"}
+                  required
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                  className="w-full bg-surface-hover text-foreground border-2 border-border-color rounded-xl pl-4 pr-12 py-3 font-medium focus:border-[#58CC02] focus:bg-surface focus:outline-none transition-colors"
+                  placeholder="Enter current password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowCurrent(!showCurrent)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-bold hover:text-foreground transition-colors"
+                >
+                  {showCurrent ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                </button>
+              </div>
             </div>
 
             <div>
               <label className="block text-[11px] font-black text-bold uppercase tracking-widest mb-2">New Password</label>
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-surface-hover text-foreground border-2 border-border-color rounded-xl px-4 py-3 font-medium focus:border-[#58CC02] focus:bg-surface focus:outline-none transition-colors"
-                placeholder="Enter new strong password"
-              />
+              <div className="relative">
+                <input
+                  type={showNew ? "text" : "password"}
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full bg-surface-hover text-foreground border-2 border-border-color rounded-xl pl-4 pr-12 py-3 font-medium focus:border-[#58CC02] focus:bg-surface focus:outline-none transition-colors"
+                  placeholder="Enter new strong password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowNew(!showNew)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-bold hover:text-foreground transition-colors"
+                >
+                  {showNew ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                </button>
+              </div>
             </div>
 
             <div>
               <label className="block text-[11px] font-black text-bold uppercase tracking-widest mb-2">Confirm New Password</label>
-              <input
-                type="password"
-                required
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full bg-surface-hover text-foreground border-2 border-border-color rounded-xl px-4 py-3 font-medium focus:border-[#58CC02] focus:bg-surface focus:outline-none transition-colors"
-                placeholder="Confirm your new password"
-              />
+              <div className="relative">
+                <input
+                  type={showConfirm ? "text" : "password"}
+                  required
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="w-full bg-surface-hover text-foreground border-2 border-border-color rounded-xl pl-4 pr-12 py-3 font-medium focus:border-[#58CC02] focus:bg-surface focus:outline-none transition-colors"
+                  placeholder="Confirm your new password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirm(!showConfirm)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-bold hover:text-foreground transition-colors"
+                >
+                  {showConfirm ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                </button>
+              </div>
             </div>
           </div>
 

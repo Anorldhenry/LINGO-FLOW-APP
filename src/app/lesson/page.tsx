@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { X, Heart, Volume2, Check, XCircle, Trophy, Loader2, WifiOff } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 
-import { LessonItem } from '@/lib/lesson-data'
+import { LessonItem, LESSON_BANKS } from '@/lib/lesson-data'
 
 const speakWord = (word: string, lang: string) => {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
@@ -105,18 +105,43 @@ function LessonContent() {
 
       const { data, error } = await query.order('external_id', { ascending: true })
 
-      if (error) {
-        console.error('Error fetching lessons:', error)
-      } else if (data && data.length > 0) {
-        const bank: LessonItem[] = data.map(d => ({
+      let finalBank: LessonItem[] = []
+      
+      if (!error && data && data.length > 0) {
+        finalBank = data.map(d => ({
           id: d.external_id,
           type: d.type as any,
           question: d.question,
           options: d.options as string[],
           answer: d.answer
         }))
-        setActiveLessonItems(bank)
-        setInitialTotalCount(bank.length)
+      } else {
+        // Fallback to static data
+        const staticLessons = LESSON_BANKS[langKey] || []
+        
+        if (moduleKey) {
+          const numMap: any = {
+            'greetings': 1, 'time': 2, 'actions': 3,
+            'questions': 4, 'conversations': 5, 'advanced': 6,
+            'professional': 7, 'planning': 8, 'storytelling': 9,
+            'logic': 10, 'logistics': 11, 'fluency': 12
+          }
+          const order = numMap[moduleKey]
+          if (order) {
+            const prefix = `${langKey.charAt(0).toLowerCase()}${order}-`
+            const fallbacks = staticLessons.filter((l: LessonItem) => l.id.startsWith(prefix))
+            finalBank = fallbacks
+          } else {
+            finalBank = staticLessons
+          }
+        } else {
+          finalBank = staticLessons
+        }
+      }
+
+      if (finalBank.length > 0) {
+        setActiveLessonItems(finalBank)
+        setInitialTotalCount(finalBank.length)
       } else {
         setActiveLessonItems([])
         setInitialTotalCount(0)

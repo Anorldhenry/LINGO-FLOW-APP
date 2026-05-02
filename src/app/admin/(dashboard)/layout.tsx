@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { LayoutDashboard, Users, LogOut, ShieldAlert } from 'lucide-react'
+import { LayoutDashboard, Users, LogOut, ShieldAlert, MessageSquare } from 'lucide-react'
 import { ThemeToggle } from '@/components/ThemeToggle'
 
 export default async function AdminDashboardLayout({
@@ -27,7 +27,7 @@ export default async function AdminDashboardLayout({
       {/* Sidebar Navigation */}
       <aside className="w-full md:w-64 bg-surface border-b-2 md:border-b-0 md:border-r-2 border-border-color flex flex-col md:min-h-screen sticky top-0 z-40">
         <div className="p-4 md:p-6 border-b-2 border-border-color flex items-center justify-between gap-3">
-          <img src="/assets/logo-transparent.png" alt="Lingo Flow" className="h-8 w-auto drop-shadow-sm" />
+          <img src="/assets/logo-transparent.png" alt="Lingo Flow" className="h-8 w-auto" />
           <div>
             <h1 className="text-xl font-extrabold text-foreground tracking-tight">Admin</h1>
             <p className="text-[10px] font-bold text-bold uppercase tracking-widest">Lingo Flow</p>
@@ -40,24 +40,31 @@ export default async function AdminDashboardLayout({
         <nav className="p-4 md:p-6 flex flex-row md:flex-col gap-2 md:gap-4 overflow-x-auto flex-none md:flex-1 w-full hide-scrollbar border-b-2 md:border-b-0 border-border-color">
           <Link 
             href="/admin" 
-            className="flex items-center gap-3 p-4 rounded-xl border-2 border-border-color hover:border-[#58CC02] hover:bg-info-bg transition-all font-bold text-foreground group shadow-sm bg-surface"
+            className="flex items-center gap-3 p-4 rounded-xl border-2 border-border-color hover:border-[#58CC02] hover:bg-success-bg transition-all font-bold text-foreground group shadow-sm bg-surface"
           >
             <LayoutDashboard className="h-5 w-5 text-bold group-hover:text-[#58CC02]" />
             Overview
           </Link>
           <Link 
             href="/admin/users" 
-            className="flex items-center gap-3 p-4 rounded-xl border-2 border-border-color hover:border-[#58CC02] hover:bg-info-bg transition-all font-bold text-foreground group shadow-sm bg-surface"
+            className="flex items-center gap-3 p-4 rounded-xl border-2 border-border-color hover:border-[#58CC02] hover:bg-success-bg transition-all font-bold text-foreground group shadow-sm bg-surface"
           >
             <Users className="h-5 w-5 text-bold group-hover:text-[#58CC02]" />
             Users
           </Link>
           <Link 
             href="/admin/settings" 
-            className="flex items-center gap-3 p-4 rounded-xl border-2 border-border-color hover:border-[#58CC02] hover:bg-info-bg transition-all font-bold text-foreground group shadow-sm bg-surface"
+            className="flex items-center gap-3 p-4 rounded-xl border-2 border-border-color hover:border-[#58CC02] hover:bg-success-bg transition-all font-bold text-foreground group shadow-sm bg-surface"
           >
             <ShieldAlert className="h-5 w-5 text-bold group-hover:text-[#58CC02]" />
             Settings
+          </Link>
+          <Link 
+            href="/admin/community" 
+            className="flex items-center gap-3 p-4 rounded-xl border-2 border-border-color hover:border-[#58CC02] hover:bg-success-bg transition-all font-bold text-foreground group shadow-sm bg-surface"
+          >
+            <MessageSquare className="h-5 w-5 text-bold group-hover:text-[#58CC02]" />
+            Community
           </Link>
         </nav>
 

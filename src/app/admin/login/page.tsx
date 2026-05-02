@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ShieldAlert, Loader2, Lock, User, ArrowLeft } from 'lucide-react'
+import { ShieldAlert, Loader2, Lock, User, ArrowLeft, Eye, EyeOff } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import Link from 'next/link'
@@ -16,6 +16,7 @@ export default function AdminLoginPage() {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -24,61 +25,91 @@ export default function AdminLoginPage() {
     setError(null)
     setIsLoading(true)
 
-    const internalEmail = `${username.trim().toLowerCase()}@lingoflow.ai`
+    const cleanedUsername = username.trim().toLowerCase()
+    const internalEmail = cleanedUsername.includes('@') ? cleanedUsername : `${cleanedUsername}@lingoflow.ai`
 
     try {
-      // Normal sign in attempt
+      // MANDATORY: Clear any stale sessions/cookies before attempting a new login
+      await supabase.auth.signOut();
+      localStorage.clear();
+      sessionStorage.clear();
+      // 1. Primary Authentication Attempt
       const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
         email: internalEmail,
         password: password,
       })
 
-      // If sign in fails, and they are typing the fallback bootstrap credentials, auto-create it
+      // 2. Success Path
+      if (!signInError && signInData.user) {
+        // Enforce Admin Rights Check
+        const isSuperAdmin = signInData.user.email === 'superadmin@lingoflow.ai' || signInData.user.user_metadata?.isAdmin
+        
+        if (!isSuperAdmin) {
+          await supabase.auth.signOut()
+          setError('Access denied. This account does not have administrative privileges.')
+          setIsLoading(false)
+          return
+        }
+
+        // Auto-provision profile details if missing (ensures they bypass setup screens)
+        await supabase.from('profiles').upsert({ 
+          id: signInData.user.id, 
+          target_language: 'Arabic',
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'id' })
+
+        router.push('/admin')
+        return
+      }
+
+      // 3. Conditional Error / Bootstrap Path
       if (signInError) {
-        if (username.trim().toLowerCase() === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-          const { error: signUpError } = await supabase.auth.signUp({
+        console.error("DEBUG - Admin Login Failure:", {
+          emailAttempted: internalEmail,
+          errorCode: signInError.status,
+          errorMessage: signInError.message
+        });
+
+        if (signInError.message.includes('Email not confirmed')) {
+          setError('CRITICAL: Email check required. Please go to your Supabase Dashboard > Authentication > Users, and click "Confirm Email" for superadmin@lingoflow.ai.');
+          setIsLoading(false);
+          return;
+        }
+
+        const isDefaultCreds = (cleanedUsername === ADMIN_USERNAME || cleanedUsername === `${ADMIN_USERNAME}@lingoflow.ai`) && password.trim() === ADMIN_PASSWORD;
+
+        if (isDefaultCreds) {
+          console.log("SUCCESS: Default Admin Credentials detected. Proceeding to bootstrap/sync...");
+          // Attempt one-time bootstrap
+          console.log("Admin account missing? Attempting system bootstrap...")
+          const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
             email: internalEmail,
             password: ADMIN_PASSWORD,
             options: { data: { full_name: 'Admin', isAdmin: true } }
           })
-          if (signUpError) { 
-            // If the user already exists, the real error was the signInError (invalid password)
-            if (signUpError.message.includes('already registered') || signUpError.message.includes('already exists')) {
-              setError('Invalid login credentials. Have you previously changed the admin password?');
+
+          if (signUpError) {
+            // Check if user already exists (meaning they just entered the WRONG password for an existing account)
+            if (signUpError.message.includes('already registered')) {
+              setError('Incorrect password. If you changed your admin password in Settings, please use that one. Otherwise, reset it via the Supabase SQL editor.');
             } else {
-              setError(signUpError.message); 
+              setError(`Setup Error: ${signUpError.message}`);
             }
-            setIsLoading(false); 
-            return 
+          } else if (signUpData.user) {
+            // New user created! Log them in.
+            await supabase.auth.signInWithPassword({ email: internalEmail, password: ADMIN_PASSWORD })
+            router.push('/admin')
+            return
           }
-          
-          await supabase.auth.signInWithPassword({ email: internalEmail, password: ADMIN_PASSWORD })
         } else {
-          setError('Invalid admin username or password.')
-          setIsLoading(false)
-          return
-        }
-      } else if (signInData.user) {
-        // If they successfully signed in, verify they are actually an admin!
-        const isActuallyAdmin = signInData.user.user_metadata?.isAdmin || signInData.user.email === 'superadmin@lingoflow.ai'
-        
-        if (!isActuallyAdmin) {
-          await supabase.auth.signOut()
-          setError('Access denied. Account does not have admin privileges.')
-          setIsLoading(false)
-          return
+          // Generic login failure - Reveal more detail if it's not a standard mismatch
+          setError(signInError.message === 'Invalid login credentials' 
+            ? 'Invalid username or password. Please try again.' 
+            : `Login Error: ${signInError.message} (Code: ${signInError.status})`);
         }
       }
-
-      // Update the admin profile with a target_language so it doesn't redirect to /setup
-      const { data: { user } } = await supabase.auth.getUser()
-      if (user) {
-        await supabase.from('profiles').update({ target_language: 'Arabic' }).eq('id', user.id)
-      }
-
-      router.push('/admin')
     } catch (err: any) {
-      setError(err.message || 'An unexpected error occurred.')
+      setError(err.message || 'An unexpected error occurred. Please refresh and try again.')
     } finally {
       setIsLoading(false)
     }
@@ -107,14 +138,14 @@ export default function AdminLoginPage() {
         {/* Logo / Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-24 h-24 mb-6 relative">
-            <img src="/assets/logo-transparent.png" className="w-full h-full object-contain drop-shadow-2xl" alt="Lingo Flow" />
+            <img src="/assets/logo-transparent.png" className="w-full h-full object-contain" alt="Lingo Flow" />
           </div>
           <h1 className="text-3xl font-extrabold text-foreground mb-2 tracking-tight">Admin Panel</h1>
           <p className="text-muted font-bold text-sm">Lingo Flow Platform Management</p>
         </div>
 
         {/* Login Card */}
-        <div className="bg-surface backdrop-blur-xl rounded-[32px] p-8 border border-border-color shadow-2xl">
+        <div className="bg-surface backdrop-blur-xl rounded-[48px] p-8 border border-border-color shadow-2xl">
           <form onSubmit={handleSubmit} className="space-y-5">
 
             <div>
@@ -141,13 +172,20 @@ export default function AdminLoginPage() {
                   <Lock className="h-5 w-5" />
                 </div>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-surface-hover text-foreground border-2 border-border-color rounded-2xl pl-12 pr-4 py-3.5 font-medium focus:border-[#58CC02] focus:bg-surface focus:outline-none transition-all placeholder:text-muted"
+                  className="w-full bg-surface-hover text-foreground border-2 border-border-color rounded-2xl pl-12 pr-12 py-3.5 font-medium focus:border-[#58CC02] focus:bg-surface focus:outline-none transition-all placeholder:text-muted"
                   placeholder="••••••••"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-bold hover:text-foreground transition-colors"
+                >
+                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                </button>
               </div>
             </div>
 

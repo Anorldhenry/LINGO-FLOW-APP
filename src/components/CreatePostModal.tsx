@@ -58,10 +58,10 @@ export default function CreatePostModal({ isOpen, onClose, targetLang, onPostCre
                 type="button"
                 onClick={() => setType('question')}
                 className={`flex-1 flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all 
-                ${type === 'question' ? 'border-[#1CB0F6] bg-info-bg border-b-4' : 'border-border-color hover:bg-surface-hover border-b-4'}`}
+                ${type === 'question' ? 'border-[#58CC02] bg-success-bg border-b-4' : 'border-border-color hover:bg-surface-hover border-b-4'}`}
              >
-                <HelpCircle className={`h-6 w-6 ${type === 'question' ? 'text-[#1CB0F6]' : 'text-bold'}`} />
-                <span className={`text-[10px] font-black uppercase tracking-widest ${type === 'question' ? 'text-[#1CB0F6]' : 'text-bold'}`}>Question</span>
+                <HelpCircle className={`h-6 w-6 ${type === 'question' ? 'text-[#58CC02]' : 'text-bold'}`} />
+                <span className={`text-[10px] font-black uppercase tracking-widest ${type === 'question' ? 'text-[#58CC02]' : 'text-bold'}`}>Question</span>
              </button>
           </div>
 

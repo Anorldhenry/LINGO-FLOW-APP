@@ -22,12 +22,19 @@ export async function POST(req: NextRequest) {
     // 0. SUBSCRIPTION & PROGRESS CHECK
     let completedModules = []
     if (user) {
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('subscription_tier, subscription_expiry, completed_modules')
-        .eq('id', user.id)
-        .single()
+      const { data: profile, error: profileError } = await Promise.race([
+        supabase
+          .from('profiles')
+          .select('subscription_tier, subscription_expiry, completed_modules')
+          .eq('id', user.id)
+          .single(),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Tutor Profile Timeout')), 5000))
+      ]) as any
       
+      if (profileError) {
+        console.error('Tutor Profile Error:', profileError)
+      }
+
       const isSubscribed = profile && profile.subscription_tier && profile.subscription_tier !== 'free'
       if (!isSubscribed) {
         return NextResponse.json({ error: 'Subscription required' }, { status: 403 })

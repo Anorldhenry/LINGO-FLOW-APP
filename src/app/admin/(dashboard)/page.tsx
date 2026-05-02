@@ -1,40 +1,39 @@
 import { createClient } from '@/lib/supabase/server'
 import { Users, Trophy, Flame, Languages } from 'lucide-react'
+import { SyncButton } from './SyncButton'
 
 export default async function AdminOverview() {
   const supabase = await createClient()
   
   // Fetch overall statistics
-  const { data: profiles, error } = await supabase
-    .from('profiles')
-    .select('*')
+  const { data: profiles, error } = await Promise.race([
+    supabase
+      .from('profiles')
+      .select('*'),
+    new Promise((_, reject) => setTimeout(() => reject(new Error('Admin Fetch Timeout')), 8000))
+  ]) as any
 
   const totalUsers = profiles?.length || 0
-  const totalXp = profiles?.reduce((sum, p) => sum + (p.xp || 0), 0) || 0
-  const totalStreaks = profiles?.reduce((sum, p) => sum + (p.streak || 0), 0) || 0
+  const totalXp = profiles?.reduce((sum: number, p: any) => sum + (p.xp || 0), 0) || 0
+  const totalStreaks = profiles?.reduce((sum: number, p: any) => sum + (p.streak || 0), 0) || 0
   
-  // Pre-seed language counts so all platforms show up in the UI even with 0 users
+  // Pre-seed language counts
   const initialLanguages: Record<string, number> = {
-    'Arabic': 0,
-    'German': 0,
-    'French': 0,
-    'Runyankore': 0,
-    'Kiswahili': 0,
-    'Luganda': 0
+    'Arabic': 0, 'German': 0, 'French': 0, 'Runyankore': 0, 'Kiswahili': 0, 'Luganda': 0
   }
 
   // Get language popularity
-  const languageCounts = profiles?.reduce((acc: Record<string, number>, p) => {
+  const languageCounts = (profiles || []).reduce((acc: Record<string, number>, p: any) => {
     const lang = p.target_language
     if (lang) {
        acc[lang] = (acc[lang] || 0) + 1
     }
     return acc
-  }, initialLanguages) || initialLanguages
+  }, { ...initialLanguages })
 
   const topLanguage = Object.entries(languageCounts)
-    .filter(([_, count]) => count > 0)
-    .sort(([, a]: [string, number], [, b]: [string, number]) => b - a)[0]?.[0] || 'N/A'
+    .filter(([_, count]) => (count as number) > 0)
+    .sort((a, b) => (b[1] as number) - (a[1] as number))[0]?.[0] || 'N/A'
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -48,8 +47,8 @@ export default async function AdminOverview() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
         {/* Total Users */}
-        <div className="bg-surface p-6 rounded-3xl border-2 border-border-color border-b-[6px] shadow-sm transform hover:-translate-y-1 transition-transform">
-          <div className="bg-info-bg w-12 h-12 rounded-2xl flex items-center justify-center mb-4">
+        <div className="bg-surface p-6 rounded-[40px] border-2 border-border-color border-b-[6px] shadow-sm transform hover:-translate-y-1 transition-transform">
+          <div className="bg-success-bg w-12 h-12 rounded-2xl flex items-center justify-center mb-4">
              <Users className="h-6 w-6 text-[#58CC02]" />
           </div>
           <p className="text-[11px] font-black text-bold uppercase tracking-widest mb-1">Total Learners</p>
@@ -57,7 +56,7 @@ export default async function AdminOverview() {
         </div>
 
         {/* Global XP */}
-        <div className="bg-surface p-6 rounded-3xl border-2 border-border-color border-b-[6px] shadow-sm transform hover:-translate-y-1 transition-transform relative overflow-hidden">
+        <div className="bg-surface p-6 rounded-[40px] border-2 border-border-color border-b-[6px] shadow-sm transform hover:-translate-y-1 transition-transform relative overflow-hidden">
           <div className="absolute -right-4 -top-4 opacity-10">
             <Trophy className="h-32 w-32 text-[#FFC800]" />
           </div>
@@ -69,7 +68,7 @@ export default async function AdminOverview() {
         </div>
 
         {/* Total Streaks */}
-        <div className="bg-surface p-6 rounded-3xl border-2 border-border-color border-b-[6px] shadow-sm transform hover:-translate-y-1 transition-transform">
+        <div className="bg-surface p-6 rounded-[40px] border-2 border-border-color border-b-[6px] shadow-sm transform hover:-translate-y-1 transition-transform">
           <div className="bg-warning-bg w-12 h-12 rounded-2xl flex items-center justify-center mb-4">
              <Flame className="h-6 w-6 text-[#FF9600]" />
           </div>
@@ -78,8 +77,8 @@ export default async function AdminOverview() {
         </div>
 
         {/* Top Language */}
-        <div className="bg-surface p-6 rounded-3xl border-2 border-border-color border-b-[6px] shadow-sm transform hover:-translate-y-1 transition-transform">
-          <div className="bg-success-bg w-12 h-12 rounded-2xl flex items-center justify-center mb-4">
+        <div className="bg-surface p-6 rounded-[40px] border-2 border-border-color border-b-[6px] shadow-sm transform hover:-translate-y-1 transition-transform">
+          <div className="w-12 h-12 flex items-center justify-center mb-4 transition-transform hover:scale-110">
              <img src="/assets/logo-transparent.png" alt="Popular" className="h-6 w-auto" />
           </div>
           <p className="text-[11px] font-black text-bold uppercase tracking-widest mb-1">Most Popular</p>
@@ -93,7 +92,7 @@ export default async function AdminOverview() {
          <h3 className="text-xl font-extrabold text-foreground mb-6">Language Distribution</h3>
          <div className="space-y-4">
            {Object.entries(languageCounts).map(([lang, count]) => {
-             const percentage = totalUsers > 0 ? ((count / totalUsers) * 100).toFixed(1) : 0
+             const percentage = totalUsers > 0 ? (((count as number) / totalUsers) * 100).toFixed(1) : 0
              return (
                <div key={lang} className="flex items-center gap-4">
                  <div className="w-32 text-sm font-bold text-muted">{lang}</div>
@@ -112,6 +111,9 @@ export default async function AdminOverview() {
            )}
          </div>
       </div>
+
+      <SyncButton />
+
     </div>
   )
 }

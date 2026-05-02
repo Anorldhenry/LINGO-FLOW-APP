@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { CheckCircle2, Flame, Trophy, CalendarClock } from 'lucide-react'
+import { UserRowActions } from './UserRowActions'
 
 export default async function AdminUsersPage() {
   const supabase = await createClient()
@@ -31,7 +32,8 @@ export default async function AdminUsersPage() {
                 <th className="p-6">Target Language</th>
                 <th className="p-6 text-center">Stats</th>
                 <th className="p-6 text-center">Modules Won</th>
-                <th className="p-6 text-right">Joined / Activity</th>
+                <th className="p-6 text-right">Joined</th>
+                <th className="p-6 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="text-sm font-medium focus-within:bg-surface-hover">
@@ -87,11 +89,16 @@ export default async function AdminUsersPage() {
                        </div>
                     </td>
 
+                    {/* Actions */}
+                    <td className="p-6 text-right">
+                       <UserRowActions userId={profile.id} currentTier={profile.subscription_tier || 'free'} />
+                    </td>
+
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan={5} className="p-12 text-center text-bold font-bold">
+                  <td colSpan={6} className="p-12 text-center text-bold font-bold">
                     No learners found on the platform yet.
                   </td>
                 </tr>

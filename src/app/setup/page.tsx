@@ -5,15 +5,7 @@ import { createClient } from '@/lib/supabase/client'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Check, Loader2, ArrowLeft } from 'lucide-react'
 
-const LANGUAGES = [
-  { id: 'arabic', name: 'Arabic', flag: '🇦🇪', color: 'from-blue-400 to-blue-600', border: 'border-blue-600', bg: 'bg-blue-50' },
-  { id: 'german', name: 'German', flag: '🇩🇪', color: 'from-red-400 to-red-600', border: 'border-red-600', bg: 'bg-red-50' },
-  { id: 'french', name: 'French', flag: '🇫🇷', color: 'from-indigo-400 to-indigo-600', border: 'border-indigo-600', bg: 'bg-indigo-50' },
-  { id: 'runyankore', name: 'Runyankore', flag: '🇺🇬', color: 'from-orange-400 to-orange-600', border: 'border-orange-600', bg: 'bg-orange-50' },
-  { id: 'kiswahili', name: 'Kiswahili', flag: '🇰🇪', color: 'from-emerald-400 to-emerald-600', border: 'border-emerald-600', bg: 'bg-emerald-50' },
-  { id: 'luganda', name: 'Luganda', flag: '🇺🇬', color: 'from-yellow-400 to-yellow-600', border: 'border-yellow-600', bg: 'bg-yellow-50' },
-]
-
+import { LANGUAGES } from '@/lib/languages'
 function SetupContent() {
   const [selected, setSelected] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -30,16 +22,14 @@ function SetupContent() {
     try {
       const { data: { user } } = await supabase.auth.getUser()
       if (user) {
-        // Save the language to their profile
+        // Save the language to their profile (using upsert to ensure row exists)
         const { error } = await supabase
           .from('profiles')
-          .update({ 
+          .upsert({ 
+            id: user.id,
             target_language: selected,
-            last_lesson_lang: null,
-            last_lesson_module: null,
-            last_lesson_index: 0
-          })
-          .eq('id', user.id)
+            updated_at: new Date().toISOString()
+          }, { onConflict: 'id' })
           
         if (error) {
           console.error("Database update failed. Proceeding locally...")

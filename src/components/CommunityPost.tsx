@@ -52,7 +52,7 @@ export default function CommunityPost({ post }: { post: any }) {
 
       <div className="mb-6">
         {post.post_type === 'question' && (
-          <span className="inline-block px-3 py-1 bg-info-bg text-[#1CB0F6] text-[10px] font-black uppercase tracking-widest rounded-lg mb-2 border border-[#1CB0F6]/20">
+          <span className="inline-block px-3 py-1 bg-success-bg text-[#58CC02] text-[10px] font-black uppercase tracking-widest rounded-lg mb-2 border border-[#58CC02]/20">
             Question
           </span>
         )}
@@ -76,7 +76,7 @@ export default function CommunityPost({ post }: { post: any }) {
         </button>
         <button 
           onClick={() => setShowReplies(!showReplies)}
-          className="flex items-center gap-2 text-sm font-bold text-bold hover:text-[#1CB0F6] transition-colors"
+          className="flex items-center gap-2 text-sm font-bold text-bold hover:text-[#58CC02] transition-colors"
         >
           <MessageSquare className="h-5 w-5" />
           Reply

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, LogIn, UserPlus, Loader2 } from 'lucide-react'
+import { ArrowLeft, LogIn, UserPlus, Loader2, Eye, EyeOff } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 
 export default function AuthPage() {
@@ -12,6 +12,7 @@ export default function AuthPage() {
   
   const [isLogin, setIsLogin] = useState(true)
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [username, setUsername] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -79,10 +80,10 @@ export default function AuthPage() {
 
       {/* Main Content */}
       <main className="flex-1 flex items-center justify-center p-6">
-        <div className="w-full max-w-md bg-surface rounded-[32px] p-8 shadow-sm border-2 border-border-color">
+        <div className="w-full max-w-md bg-surface rounded-[48px] p-8 shadow-sm border-2 border-border-color">
           
           <div className="mb-8 text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 mb-4 overflow-hidden rounded-2xl bg-surface-hover border-2 border-border-color p-2 shadow-sm">
+            <div className="inline-flex items-center justify-center w-20 h-20 mb-4 transition-transform hover:scale-110">
                <img src="/assets/logo-transparent.png" className="w-full h-full object-contain" alt="Lingo Flow" />
             </div>
             <h1 className="text-3xl font-extrabold text-foreground mb-2">{isLogin ? 'Welcome Back' : 'Create Account'}</h1>
@@ -106,14 +107,23 @@ export default function AuthPage() {
             
             <div>
               <label className="block text-sm font-bold text-bold uppercase tracking-wide mb-2">Password</label>
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-surface-hover text-foreground border-2 border-border-color rounded-2xl px-4 py-3 font-medium focus:border-[#58CC02] focus:bg-surface focus:outline-none transition-colors"
-                placeholder="••••••••"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full bg-surface-hover text-foreground border-2 border-border-color rounded-2xl pl-4 pr-12 py-3 font-medium focus:border-[#58CC02] focus:bg-surface focus:outline-none transition-colors"
+                  placeholder="••••••••"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-bold hover:text-foreground transition-colors"
+                >
+                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                </button>
+              </div>
             </div>
 
             {error && (

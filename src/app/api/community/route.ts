@@ -8,23 +8,27 @@ export async function GET(req: NextRequest) {
     const lang = searchParams.get('lang')
     const type = searchParams.get('type')
 
-    let query = supabase
+    let queryBuilder = supabase
       .from('community_posts')
       .select(`
         *,
         profiles:user_id (full_name)
       `)
       .order('created_at', { ascending: false })
+      .limit(50)
 
     if (lang) {
-      query = query.eq('lang', lang)
+      queryBuilder = queryBuilder.eq('lang', lang)
     }
     
     if (type) {
-      query = query.eq('post_type', type)
+      queryBuilder = queryBuilder.eq('post_type', type)
     }
 
-    const { data: posts, error } = await query.limit(50)
+    const { data: posts, error } = await Promise.race([
+      queryBuilder,
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Community Fetch Timeout')), 8000))
+    ]) as any
 
     if (error) throw error
 
