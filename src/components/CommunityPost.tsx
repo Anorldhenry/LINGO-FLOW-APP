@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { MessageSquare, Heart, Share2, MoreHorizontal } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
 
