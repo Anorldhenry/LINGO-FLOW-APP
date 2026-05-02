@@ -96,7 +96,7 @@ export default function CommunityPost({ post }: { post: any }) {
 }
 
 function ReplySection({ postId }: { postId: string }) {
-  const [replies, setReplies] = useState([])
+  const [replies, setReplies] = useState<any[]>([])
   const [replyText, setReplyText] = useState('')
   const [isPosting, setIsPosting] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
