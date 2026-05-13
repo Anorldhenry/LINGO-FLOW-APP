@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { CheckCircle2, WifiOff } from 'lucide-react'
 
-export function LevelTwoList({ modulesList, profile, activeIndex }: any) {
+export function LevelModuleList({ modulesList, profile, activeIndex, targetLevel }: any) {
   const [isOnline, setIsOnline] = useState(true)
 
   useEffect(() => {
@@ -21,10 +21,13 @@ export function LevelTwoList({ modulesList, profile, activeIndex }: any) {
 
   return (
     <>
-      {modulesList.filter((m: any) => m.level === 2).map((mod: any) => {
+      {modulesList.filter((m: any) => m.level === targetLevel).map((mod: any) => {
         const isFinished = profile.completed_modules.includes(mod.id);
         const serverLocked = modulesList.findIndex((m: any) => m.id === mod.id) > activeIndex && !isFinished;
-        const isLocked = serverLocked || !isOnline;
+        
+        // Modules in Level 2, 3, and 4 require connection for advanced features usually
+        const connectionRequired = targetLevel >= 2;
+        const isLocked = serverLocked || (connectionRequired && !isOnline);
 
         return (
           <div key={mod.id} className="w-full flex flex-col items-center gap-6 relative group">
@@ -41,7 +44,7 @@ export function LevelTwoList({ modulesList, profile, activeIndex }: any) {
               {isLocked ? (
                 <div className="w-20 h-20 rounded-full border-b-8 flex items-center justify-center shadow-md relative z-10 grayscale opacity-50 bg-neutral-300 text-muted">
                   <span className="text-3xl">{mod.icon}</span>
-                  {!isOnline && !serverLocked && (
+                  {!isOnline && connectionRequired && !serverLocked && (
                     <div className="absolute -right-2 top-0 bg-red-400 rounded-full p-1.5 border-4 border-surface shadow-sm" title="Online Required">
                       <WifiOff className="h-4 w-4 text-white" />
                     </div>
@@ -51,7 +54,7 @@ export function LevelTwoList({ modulesList, profile, activeIndex }: any) {
                 <Link 
                   href={`/lesson?lang=${profile.target_language}&module=${mod.id}`}
                   className={`w-20 h-20 rounded-full border-b-8 flex items-center justify-center transform transition-all cursor-pointer shadow-md relative z-10 hover:-translate-y-1 
-                    ${isFinished ? 'animate-pulse-slow ring-4 ring-[#58CC02]/20' : 'ring-4 ring-transparent hover:ring-[#CE82FF]/10'}`}
+                    ${isFinished ? 'animate-pulse-slow ring-4 ring-[#58CC02]/20' : 'ring-4 ring-transparent hover:ring-white/20'}`}
                   style={{ 
                     backgroundColor: isFinished ? '#58CC02' : mod.color, 
                     borderColor: isFinished ? '#46A302' : mod.border 
@@ -67,7 +70,7 @@ export function LevelTwoList({ modulesList, profile, activeIndex }: any) {
               )}
               <h3 className={`text-sm flex flex-col items-center font-extrabold uppercase tracking-wide ${isLocked ? 'text-neutral-400' : 'text-foreground'}`}>
                 {mod.name}
-                {!isOnline && !serverLocked && (
+                {!isOnline && connectionRequired && !serverLocked && (
                     <span className="text-[10px] text-red-500 mt-1">Requires Connection</span>
                 )}
               </h3>

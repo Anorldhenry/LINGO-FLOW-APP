@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { LANGUAGES } from '@/lib/languages'
 import { ThemeToggle } from '@/components/ThemeToggle'
-import { LevelTwoList } from '@/components/LevelTwoList'
+import { LevelModuleList } from '@/components/LevelModuleList'
 import { ProCard } from '@/components/ProCard'
 import { Sparkles, Trophy as TrophyIcon } from 'lucide-react'
 import { LogOut, Flame, Trophy, Shield, Settings, CheckCircle2, Users } from 'lucide-react'
@@ -96,6 +96,18 @@ export default async function DashboardPage() {
     { id: 'logic', level: 2, unit: 'Unit 10: Opinion', name: 'Opinion', icon: '🧠', color: '#FF4B4B', border: '#D33131' },
     { id: 'logistics', level: 2, unit: 'Unit 11: Logistics', name: 'Logistics', icon: '✈️', color: '#1CB0F6', border: '#1899D6' },
     { id: 'fluency', level: 2, unit: 'Unit 12: Expert', name: 'Expert', icon: '👑', color: '#FFC800', border: '#CC9A00' },
+
+    // LEVEL 3: Proficiency
+    { id: 'social', level: 3, unit: 'Unit 13: Connections', name: 'Social', icon: '🤝', color: '#58CC02', border: '#357B00' },
+    { id: 'culture', level: 3, unit: 'Unit 14: Traditions', name: 'Culture', icon: '🎭', color: '#CE82FF', border: '#9F56D2' },
+    { id: 'news', level: 3, unit: 'Unit 15: Current Affairs', name: 'News', icon: '📰', color: '#FF9600', border: '#D97E00' },
+    { id: 'nature', level: 3, unit: 'Unit 16: Environment', name: 'Nature', icon: '🌿', color: '#1CB0F6', border: '#1899D6' },
+
+    // LEVEL 4: Fluency
+    { id: 'idioms', level: 4, unit: 'Unit 17: Expressions', name: 'Idioms', icon: '🗣️', color: '#FF4B4B', border: '#D33131' },
+    { id: 'business', level: 4, unit: 'Unit 18: Professional', name: 'Business', icon: '💼', color: '#FFC800', border: '#CC9A00' },
+    { id: 'history', level: 4, unit: 'Unit 19: Antiquity', name: 'History', icon: '🏛️', color: '#58CC02', border: '#357B00' },
+    { id: 'philosophical', level: 4, unit: 'Unit 20: Philosophy', name: 'Philosophy', icon: '🧠', color: '#CE82FF', border: '#9F56D2' },
   ];
 
   const firstUncompletedIndex = modulesList.findIndex(mod => !profile.completed_modules.includes(mod.id));
@@ -246,51 +258,7 @@ export default async function DashboardPage() {
               </div>
               
               <div className="bg-surface rounded-3xl border-2 border-border-color p-6 flex flex-col items-center gap-8 relative overflow-hidden">
-                <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-4 bg-border-color/30 -z-0"></div>
-                {modulesList.filter(m => m.level === 1).map((mod, idx) => {
-                  const isFinished = profile.completed_modules.includes(mod.id);
-                  const isLocked = modulesList.findIndex(m => m.id === mod.id) > activeIndex && !isFinished;
-                  return (
-                    <div key={mod.id} className="w-full flex flex-col items-center gap-6 relative group">
-                      <div className="w-full flex items-center gap-4 z-10 my-2">
-                        <div className="flex-1 h-0.5 bg-border-color/50"></div>
-                        <div className={`text-[10px] font-black px-3 py-1 rounded-lg uppercase tracking-widest border-b-2
-                          ${isLocked ? 'bg-border-b-color text-neutral-400 border-border-color' : isFinished ? 'bg-success-bg text-[#46A302] border-[#58CC02]' : 'bg-[#FFC800] text-yellow-900 border-[#CC9A00]'}`}>
-                          {mod.unit}
-                        </div>
-                        <div className="flex-1 h-0.5 bg-border-color/50"></div>
-                      </div>
-
-                      <div className="flex flex-col items-center gap-3 relative w-full group">
-                        {isLocked ? (
-                          <div className="w-20 h-20 rounded-full border-b-8 flex items-center justify-center shadow-md relative z-10 grayscale opacity-50 bg-neutral-300 text-muted">
-                            <span className="text-3xl">{mod.icon}</span>
-                          </div>
-                        ) : (
-                          <Link 
-                            href={`/lesson?lang=${profile.target_language || 'Arabic'}&module=${mod.id}`}
-                            className={`w-20 h-20 rounded-full border-b-8 flex items-center justify-center transform transition-all cursor-pointer shadow-md relative z-10 hover:-translate-y-1 
-                              ${isFinished ? 'animate-pulse-slow ring-4 ring-[#58CC02]/20' : 'ring-4 ring-transparent hover:ring-[#58CC02]/10'}`}
-                            style={{ 
-                              backgroundColor: isFinished ? '#58CC02' : mod.color, 
-                              borderColor: isFinished ? '#46A302' : mod.border 
-                            }}
-                          >
-                            <span className="text-3xl group-hover:scale-110 transition-transform">{mod.icon}</span>
-                            {isFinished && (
-                              <div className="absolute -right-2 top-0 bg-[#58CC02] rounded-full p-1.5 border-4 border-surface shadow-sm animate-in zoom-in duration-300">
-                                <CheckCircle2 className="h-4 w-4 text-white" />
-                              </div>
-                            )}
-                          </Link>
-                        )}
-                        <h3 className={`text-sm font-extrabold uppercase tracking-wide ${isLocked ? 'text-neutral-400' : 'text-foreground'}`}>
-                          {mod.name}
-                        </h3>
-                      </div>
-                    </div>
-                  );
-                })}
+                <LevelModuleList modulesList={modulesList} profile={profile} activeIndex={activeIndex} targetLevel={1} />
               </div>
             </div>
 
@@ -303,7 +271,33 @@ export default async function DashboardPage() {
               </div>
               
               <div className="bg-surface rounded-3xl border-2 border-border-color p-6 flex flex-col items-center gap-8 relative overflow-hidden">
-                <LevelTwoList modulesList={modulesList} profile={profile} activeIndex={activeIndex} />
+                <LevelModuleList modulesList={modulesList} profile={profile} activeIndex={activeIndex} targetLevel={2} />
+              </div>
+            </div>
+
+            {/* LEVEL 3 SECTION */}
+            <div className="relative">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="h-0.5 flex-1 bg-border-color"></div>
+                <h2 className="text-xl font-black text-[#1CB0F6] uppercase tracking-[0.2em]">Level 3: Proficiency</h2>
+                <div className="h-0.5 flex-1 bg-border-color"></div>
+              </div>
+              
+              <div className="bg-surface rounded-3xl border-2 border-border-color p-6 flex flex-col items-center gap-8 relative overflow-hidden">
+                <LevelModuleList modulesList={modulesList} profile={profile} activeIndex={activeIndex} targetLevel={3} />
+              </div>
+            </div>
+
+            {/* LEVEL 4 SECTION */}
+            <div className="relative">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="h-0.5 flex-1 bg-border-color"></div>
+                <h2 className="text-xl font-black text-[#FF9600] uppercase tracking-[0.2em]">Level 4: Fluency</h2>
+                <div className="h-0.5 flex-1 bg-border-color"></div>
+              </div>
+              
+              <div className="bg-surface rounded-3xl border-2 border-border-color p-6 flex flex-col items-center gap-8 relative overflow-hidden">
+                <LevelModuleList modulesList={modulesList} profile={profile} activeIndex={activeIndex} targetLevel={4} />
               </div>
             </div>
           </div>

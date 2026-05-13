@@ -16,6 +16,11 @@ export default function AuthPage() {
   const [username, setUsername] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  
+  // Prefetch dashboard for faster transition
+  useState(() => {
+    router.prefetch('/dashboard')
+  })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -61,9 +66,7 @@ export default function AuthPage() {
         ? 'Invalid username or password.' 
         : err.message || 'An error occurred during authentication')
     } finally {
-      // We don't necessarily clear loading if we are redirecting
-      // but we do it if there was an error
-      if (error) setIsLoading(false)
+      setIsLoading(false)
     }
   }
 
@@ -99,7 +102,10 @@ export default function AuthPage() {
                 type="text"
                 required
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => {
+                  setUsername(e.target.value)
+                  if (error) setError(null)
+                }}
                 className="w-full bg-surface-hover text-foreground border-2 border-border-color rounded-2xl px-4 py-3 font-medium focus:border-[#58CC02] focus:bg-surface focus:outline-none transition-colors"
                 placeholder={isLogin ? "Your username" : "e.g. polyglot123"}
               />
@@ -112,7 +118,10 @@ export default function AuthPage() {
                   type={showPassword ? "text" : "password"}
                   required
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value)
+                    if (error) setError(null)
+                  }}
                   className="w-full bg-surface-hover text-foreground border-2 border-border-color rounded-2xl pl-4 pr-12 py-3 font-medium focus:border-[#58CC02] focus:bg-surface focus:outline-none transition-colors"
                   placeholder="••••••••"
                 />

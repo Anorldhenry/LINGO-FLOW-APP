@@ -135,6 +135,39 @@ export const LESSON_BANKS: Record<string, LessonItem[]> = {
     { id: 'a12-3', type: 'mcq', question: 'Match: "Insha\'Allah"', options: ['God willing', 'Thank God'], answer: 'God willing' },
     { id: 'a12-4', type: 'mcq', question: 'Match: "Alhamdulillah"', options: ['Praise be to God', 'Peace be with you'], answer: 'Praise be to God' },
     { id: 'a12-5', type: 'mcq', question: 'Translate: "Take care"', options: ['Intabih', 'Shukran'], answer: 'Intabih' },
+
+    // Level 3: Unit 13 - Relationships
+    { id: 'a13-1', type: 'mcq', question: 'Translate: "He is my best friend"', options: ['Huwa sadiqi al-mufaddal', 'Huwa akhi', 'Huwa mudiri'], answer: 'Huwa sadiqi al-mufaddal' },
+    { id: 'a13-2', type: 'mcq', question: 'Match: "Ihtiram"', options: ['Respect', 'Love', 'Fear'], answer: 'Respect' },
+    { id: 'a13-3', type: 'mcq', question: 'Translate: "We have a strong bond"', options: ['Ladayna rawabit qawiyya', 'Ladayna bayt', 'Ladayna sayyara'], answer: 'Ladayna rawabit qawiyya' },
+    
+    // Level 3: Unit 14 - Culture
+    { id: 'a14-1', type: 'mcq', question: 'Match: "Turath"', options: ['Heritage', 'Future', 'War'], answer: 'Heritage' },
+    { id: 'a14-2', type: 'mcq', question: 'Translate: "Hospitality is a virtue"', options: ['Al-karam fadila', 'Al-akl laiz', 'Al-shams jamila'], answer: 'Al-karam fadila' },
+    
+    // Level 3: Unit 15 - News & Issues
+    { id: 'a15-1', type: 'mcq', question: 'Match: "Siyasa"', options: ['Politics', 'Science', 'Sports'], answer: 'Politics' },
+    { id: 'a15-2', type: 'mcq', question: 'Translate: "The world is changing"', options: ['Al-alam yataghayyar', 'Al-alam kabir', 'Al-alam jamil'], answer: 'Al-alam yataghayyar' },
+    
+    // Level 3: Unit 16 - Environment
+    { id: 'a16-1', type: 'mcq', question: 'Match: "Al-bi\'a"', options: ['The environment', 'The city', 'The space'], answer: 'The environment' },
+    { id: 'a16-2', type: 'mcq', question: 'Translate: "Protecting nature is important"', options: ['Himayat al-tabi\'a muhimma', 'Al-tabi\'a jamil', 'Al-tabi\'a khadra'], answer: 'Himayat al-tabi\'a muhimma' },
+
+    // Level 4: Unit 17 - Idioms & Mastery
+    { id: 'a17-1', type: 'mcq', question: 'Translate: "Time is like a sword"', options: ['Al-waqt ka al-sayf', 'Al-waqt thamin', 'Al-waqt dahab'], answer: 'Al-waqt ka al-sayf' },
+    { id: 'a17-2', type: 'mcq', question: 'Match: "Al-sabr miftah al-faraj"', options: ['Patience is the key to relief', 'Patience is hard', 'Luck is key'], answer: 'Patience is the key to relief' },
+    
+    // Level 4: Unit 18 - Business
+    { id: 'a18-1', type: 'mcq', question: 'Match: "Istithmar"', options: ['Investment', 'Spending', 'Saving'], answer: 'Investment' },
+    { id: 'a18-2', type: 'mcq', question: 'Translate: "We need a sustainable strategy"', options: ['Nahtaj ila istratijiyya mustadama', 'Nahtaj ila mal', 'Nahtaj ila waqt'], answer: 'Nahtaj ila istratijiyya mustadama' },
+    
+    // Level 4: Unit 19 - History & Art
+    { id: 'a19-1', type: 'mcq', question: 'Match: "Hadara"', options: ['Civilization', 'Building', 'Forest'], answer: 'Civilization' },
+    { id: 'a19-2', type: 'mcq', question: 'Translate: "Art reflects the soul"', options: ['Al-fann ya\'kis al-ruh', 'Al-fann jamil', 'Al-ruh qawiyya'], answer: 'Al-fann ya\'kis al-ruh' },
+    
+    // Level 4: Unit 20 - Philosophy
+    { id: 'a20-1', type: 'mcq', question: 'Match: "Hikma"', options: ['Wisdom', 'Knowledge', 'Power'], answer: 'Wisdom' },
+    { id: 'a20-2', type: 'mcq', question: 'Translate: "I think, therefore I am"', options: ['Ana ufakir, idan ana mawjud', 'Ana huna', 'Al-tafkir sa\'b'], answer: 'Ana ufakir, idan ana mawjud' },
   ],
   Kiswahili: [
     // Module 1: Greetings & Introductions
@@ -263,6 +296,39 @@ export const LESSON_BANKS: Record<string, LessonItem[]> = {
     { id: 'k12-3', type: 'mcq', question: 'Match: "Hamna shida"', options: ['No problem', 'Thank you'], answer: 'No problem' },
     { id: 'k12-4', type: 'mcq', question: 'Translate: "I understand"', options: ['Naelewa', 'Sielewi'], answer: 'Naelewa' },
     { id: 'k12-5', type: 'mcq', question: 'Translate: "Excellent"', options: ['Bora kabisa', 'Mbaya sana'], answer: 'Bora kabisa' },
+
+    // Level 3: Unit 13 - Social Life
+    { id: 'k13-1', type: 'mcq', question: 'Translate: "He is my best friend"', options: ['Yeye ni rafiki yangu wa dhati', 'Yeye ni ndugu yangu', 'Yeye ni mwalimu wangu'], answer: 'Yeye ni rafiki yangu wa dhati' },
+    { id: 'k13-2', type: 'mcq', question: 'Match: "Urafiki"', options: ['Friendship', 'Love', 'Family'], answer: 'Friendship' },
+    { id: 'k13-3', type: 'mcq', question: 'Translate: "Let us celebrate together"', options: ['Tusherehekee pamoja', 'Tucheze pamoja', 'Tulie pamoja'], answer: 'Tusherehekee pamoja' },
+
+    // Level 3: Unit 14 - Culture
+    { id: 'k14-1', type: 'mcq', question: 'Match: "Utamaduni"', options: ['Culture', 'History', 'Language'], answer: 'Culture' },
+    { id: 'k14-2', type: 'mcq', question: 'Translate: "Unity is strength"', options: ['Umoja ni nguvu', 'Maji ni uhai', 'Elimu ni mwanga'], answer: 'Umoja ni nguvu' },
+
+    // Level 3: Unit 15 - News & Issues
+    { id: 'k15-1', type: 'mcq', question: 'Match: "Siasa"', options: ['Politics', 'Economy', 'Education'], answer: 'Politics' },
+    { id: 'k15-2', type: 'mcq', question: 'Translate: "The constitution is important"', options: ['Katiba ni muhimu', 'Sheria ni kali', 'Nchi ni yetu'], answer: 'Katiba ni muhimu' },
+
+    // Level 3: Unit 16 - Environment
+    { id: 'k16-1', type: 'mcq', question: 'Match: "Mazingira"', options: ['Environment', 'Forest', 'Ocean'], answer: 'Environment' },
+    { id: 'k16-2', type: 'mcq', question: 'Translate: "Climate change is real"', options: ['Mabadiliko ya tabianchi ni kweli', 'Mvua inanyesha', 'Jua ni kali'], answer: 'Mabadiliko ya tabianchi ni kweli' },
+
+    // Level 4: Unit 17 - Idioms & Mastery
+    { id: 'k17-1', type: 'mcq', question: 'Match: "Baada ya dhiki, faraja"', options: ['After hardship comes relief', 'Hurry has no blessings', 'Knowledge is power'], answer: 'After hardship comes relief' },
+    { id: 'k17-2', type: 'mcq', question: 'Translate: "Hasty climbers have sudden falls"', options: ['Aliyekimbia haachi harufu', 'Pole pole ndio mwendo', 'Haraka haraka haina baraka'], answer: 'Haraka haraka haina baraka' },
+
+    // Level 4: Unit 18 - Business
+    { id: 'k18-1', type: 'mcq', question: 'Match: "Uchumi"', options: ['Economy', 'Trade', 'Debt'], answer: 'Economy' },
+    { id: 'k18-2', type: 'mcq', question: 'Translate: "We need more investment"', options: ['Tunahitaji uwekezaji zaidi', 'Tunahitaji fedha zaidi', 'Tunahitaji kazi zaidi'], answer: 'Tunahitaji uwekezaji zaidi' },
+
+    // Level 4: Unit 19 - History & Art
+    { id: 'k19-1', type: 'mcq', question: 'Match: "Historia"', options: ['History', 'Future', 'Today'], answer: 'History' },
+    { id: 'k19-2', type: 'mcq', question: 'Translate: "The museum is full of artifacts"', options: ['Makumbusho yamejaa vitu vya kale', 'Maktaba imejaa vitabu', 'Shule imejaa watoto'], answer: 'Makumbusho yamejaa vitu vya kale' },
+
+    // Level 4: Unit 20 - Philosophy
+    { id: 'k20-1', type: 'mcq', question: 'Match: "Falsafa"', options: ['Philosophy', 'Religion', 'Dream'], answer: 'Philosophy' },
+    { id: 'k20-2', type: 'mcq', question: 'Translate: "Knowledge has no end"', options: ['Elimu haina mwisho', 'Maisha ni mafupi', 'Kifo hakina huruma'], answer: 'Elimu haina mwisho' },
   ],
   Runyankore: [
     // Unit 1: Greetings
@@ -322,7 +388,7 @@ export const LESSON_BANKS: Record<string, LessonItem[]> = {
     { id: 'r5-6', type: 'mcq', question: 'Match the meaning: "Okuguza"', options: ["To sell", "To buy", "To give"], answer: 'To sell' },
     { id: 'r5-7', type: 'mcq', question: 'Fill in the blank: Ninyenda ______ ematooke (I want to buy matooke)', options: ['okugura', 'okuguza', 'okulya'], answer: 'okugura' },
     { id: 'r5-8', type: 'mcq', question: 'Translate: "This is too expensive"', options: ['Eki ni kyenshi munonga', 'Eki ni kyangu', 'Eki ni kirungi'], answer: 'Eki ni kyenshi munonga' },
-    { id: 'r5-9', type: 'mcq', question: 'Dialogue: A: Zingahi? B: ______ (Five thousand)', options: ['Eshirini za bitano', 'Obukumi butano', 'Enkumi eshanu'], answer: 'Enkumi eshanu' },
+    { id: 'r5-9', type: 'mcq', question: 'Dialogue: A: Zingahi? B: ______ (Five thousand)', options: ['Eshirini za bitano', 'Obukumi butano', 'Enkumi ittaano'], answer: 'Enkumi ittaano' },
     { id: 'r5-10', type: 'mcq', question: 'Translate: "Give me change"', options: ['Ompe echenji', 'Ompe esaente', 'Ompe ebyokurya'], answer: 'Ompe echenji' },
 
     // Unit 6: Advanced
@@ -367,9 +433,9 @@ export const LESSON_BANKS: Record<string, LessonItem[]> = {
 
     // Level 2: Unit 11 - Travel & Logistics
     { id: 'r11-1', type: 'mcq', question: 'Match: "Tikiti"', options: ['Ticket', 'Money'], answer: 'Tikiti' },
-    { id: 'r11-2', type: 'mcq', question: 'Translate: "Embago"', options: ['Luggage/Bag', 'Car'], answer: 'Luggage/Bag' },
+    { id: 'r11-2', type: 'mcq', question: 'Translate: "Emigigo"', options: ['Luggage/Bag', 'Car'], answer: 'Luggage/Bag' },
     { id: 'r11-3', type: 'mcq', question: 'Match: "Paaka y\'emootoka"', options: ['Bus station', 'Airport'], answer: 'Bus station' },
-    { id: 'r11-4', type: 'mcq', question: 'Translate: "Where is my bag?"', options: ['Embago yangye eri he?', 'Enju yangye eri he?'], answer: 'Embago yangye eri he?' },
+    { id: 'r11-4', type: 'mcq', question: 'Translate: "Where is my bag?"', options: ['Emigigo yangye eri he?', 'Enju yangye eri he?'], answer: 'Emigigo yangye eri he?' },
     { id: 'r11-5', type: 'mcq', question: 'Fill in: "Ninyenda ______ omuka" (I want to go home)', options: ['okuza', 'okulya'], answer: 'okuza' },
 
     // Level 2: Unit 12 - Expert Fluency
@@ -378,6 +444,39 @@ export const LESSON_BANKS: Record<string, LessonItem[]> = {
     { id: 'r12-3', type: 'mcq', question: 'Match: "Tuhwerane"', options: ['Let us help each other', 'Let us play'], answer: 'Let us help each other' },
     { id: 'r12-4', type: 'mcq', question: 'Translate: "I understand"', options: ['Nyetegyereza', 'Nimanya'], answer: 'Nyetegyereza' },
     { id: 'r12-5', type: 'mcq', question: 'Translate: "Perfect"', options: ['Kihikire kakuku', 'Kirungi'], answer: 'Kihikire kakuku' },
+
+    // Level 3: Unit 13 - Social Relationships
+    { id: 'r13-1', type: 'mcq', question: 'Translate: "They are loving each other"', options: ['Nibakundana', 'Nibakora', 'Nibasoma'], answer: 'Nibakundana' },
+    { id: 'r13-2', type: 'mcq', question: 'Match: "Obukundane"', options: ['Love/Affection', 'Hatred', 'Anger'], answer: 'Love/Affection' },
+    { id: 'r13-3', type: 'mcq', question: 'Translate: "We are good neighbors"', options: ['Turi abataahi barungi', 'Turi abanywani', 'Turi abantu'], answer: 'Turi abataahi barungi' },
+
+    // Level 3: Unit 14 - Culture
+    { id: 'r14-1', type: 'mcq', question: 'Match: "Ebyobuhangwa"', options: ['Culture/Heritage', 'Science', 'Politics'], answer: 'Culture/Heritage' },
+    { id: 'r14-2', type: 'mcq', question: 'Translate: "Respecting elders is key"', options: ['Okuha abakuru ekitinisa ni kikuru', 'Okulya ni kirungi', 'Okukora ni kirungi'], answer: 'Okuha abakuru ekitinisa ni kikuru' },
+
+    // Level 3: Unit 15 - News & Communication
+    { id: 'r15-1', type: 'mcq', question: 'Match: "Amakuru g\'erizooba"', options: ['Today\'s news', 'Tomorrow\'s plan', 'Yesterday\'s story'], answer: 'Today\'s news' },
+    { id: 'r15-2', type: 'mcq', question: 'Translate: "The radio is loud"', options: ['Radiyo erikuranga munonga', 'Radiyo ni mbi', 'Radiyo ni nungi'], answer: 'Radiyo erikuranga munonga' },
+
+    // Level 3: Unit 16 - Nature
+    { id: 'r16-1', type: 'mcq', question: 'Match: "Ebibira"', options: ['Forests', 'Rivers', 'Mountains'], answer: 'Forests' },
+    { id: 'r16-2', type: 'mcq', question: 'Translate: "Protect the environment"', options: ['Linda obuhangwa', 'Rya ebyokurya', 'Kora omurimo'], answer: 'Linda obuhangwa' },
+
+    // Level 4: Unit 17 - Mastery & Idioms
+    { id: 'r17-1', type: 'mcq', question: 'Match: "Akari omu nju nikwo kamanywa nyinemu"', options: ['What is in the house is known by the owner', 'A loud voice is strong', 'Patience is good'], answer: 'What is in the house is known by the owner' },
+    { id: 'r17-2', type: 'mcq', question: 'Translate: "Wisdom is better than strength"', options: ['Obwengye nibukira amaani', 'Amaani ni marungi', 'Okukora ni kirungi'], answer: 'Obwengye nibukira amaani' },
+
+    // Level 4: Unit 18 - Professionalism
+    { id: 'r18-1', type: 'mcq', question: 'Match: "Obushubuzi"', options: ['Trade/Business', 'Farming', 'Fishing'], answer: 'Trade/Business' },
+    { id: 'r18-2', type: 'mcq', question: 'Translate: "We need a leadership meeting"', options: ['Nahtaj ila mkutano wa viongozi', 'Nahtaj ila chakula', 'Nahtaj ila pesa'], answer: 'Nahtaj ila mkutano wa viongozi' },
+
+    // Level 4: Unit 19 - History
+    { id: 'r19-1', type: 'mcq', question: 'Match: "Ebyaaira"', options: ['History/Ancient things', 'Future', 'News'], answer: 'History/Ancient things' },
+    { id: 'r19-2', type: 'mcq', question: 'Translate: "Honoring our ancestors"', options: ['Okuha bakaishikiitwe ekitinisa', 'Okulya hamwe', 'Okuzina'], answer: 'Okuha bakaishikiitwe ekitinisa' },
+
+    // Level 4: Unit 20 - Philosophical Thought
+    { id: 'r20-1', type: 'mcq', question: 'Match: "Okuteekateeka kw\'omwoyo"', options: ['Spiritual/Deep thought', 'Physical exercise', 'Eating'], answer: 'Spiritual/Deep thought' },
+    { id: 'r20-2', type: 'mcq', question: 'Translate: "Life has many paths"', options: ['Amagara gaine emihanda mingi', 'Amagara ni mabi', 'Amagara ni marungi'], answer: 'Amagara gaine emihanda mingi' },
   ],
   Luganda: [
     // Unit 1: Greetings
@@ -393,7 +492,7 @@ export const LESSON_BANKS: Record<string, LessonItem[]> = {
     { id: 'l1-10', type: 'listening', question: 'What greeting do you hear: "ki-ka-ti"?', options: ['Ki kati', 'Webale', 'Wasuze', 'Osiibye'], answer: 'Ki kati' },
 
     // Unit 2: Time and Days
-    { id: 'l2-1', type: 'mcq', question: 'Match the meaning: "Enjuba"', options: ['The Sun', 'The Moon', 'The Stars'], answer: 'Enjuba' },
+    { id: 'l2-1', type: 'mcq', question: 'Match the meaning: "Enjuba"', options: ['The Sun', 'The Moon', 'The Stars'], answer: 'The Sun' },
     { id: 'l2-2', type: 'mcq', question: 'Translate: "Tomorrow"', options: ['Enkya', 'Eggulo', 'Leero'], answer: 'Enkya' },
     { id: 'l2-3', type: 'mcq', question: 'Translate: "Today"', options: ['Leero', 'Enkya', 'Jjo'], answer: 'Leero' },
     { id: 'l2-4', type: 'mcq', question: 'Match: "Ekiro"', options: ['Night', 'Morning', 'Afternoon'], answer: 'Night' },
@@ -448,7 +547,7 @@ export const LESSON_BANKS: Record<string, LessonItem[]> = {
     { id: 'l6-5', type: 'mcq', question: 'Translate: "It is a good day"', options: ['Lunaku lulungi', 'Enjuba eyaka', 'Kale munonga'], answer: 'Lunaku lulungi' },
     { id: 'l6-6', type: 'mcq', question: 'Translate: "I went to school yesterday"', options: ['Nagenda ku ssomero jjo', 'Ngenda ku ssomero leero', 'Njagaala okugenda ku ssomero'], answer: 'Nagenda ku ssomero jjo' },
     { id: 'l6-7', type: 'mcq', question: 'Error Correction: "Nze kugula katale"', options: ['Nagula mu katale', 'Nze kugula katale', 'Ngula mu katale'], answer: 'Nagula mu katale' },
-    { id: 'l6-8', type: 'mcq', question: 'Conversation: "A: Where do you live? B: I live in Kampala"', options: ['A: Ogera wa? B: Ngera Kampala', 'A: Ogenda wa? B: Ngera Kampala', 'A: Oli wa? B: Ndi Kampala'], answer: 'A: Ogera wa? B: Ngera Kampala' },
+    { id: 'l6-8', type: 'mcq', question: 'Conversation: "A: Where do you live? B: I live in Kampala"', options: ['A: Obeera wa? B: Mbeera Kampala', 'A: Ogenda wa? B: Mbeera Kampala', 'A: Oli wa? B: Ndi Kampala'], answer: 'A: Obeera wa? B: Mbeera Kampala' },
     { id: 'l6-9', type: 'mcq', question: 'Fill in: "Njagaala ______ Oluganda" (I like speaking Luganda)', options: ['okwogera', 'okusoma', 'okuwulira'], answer: 'okwogera' },
     { id: 'l6-10', type: 'mcq', question: 'Translate: "I will come back tomorrow"', options: ['Ndyakomawo enkya', 'Nazze jjo', 'Ngenda leero'], answer: 'Ndyakomawo enkya' },
 
@@ -490,9 +589,42 @@ export const LESSON_BANKS: Record<string, LessonItem[]> = {
     // Level 2: Unit 12 - Expert Fluency
     { id: 'l12-1', type: 'mcq', question: 'Translate: "Kirungi nnyo"', options: ['Very good', 'Very bad'], answer: 'Very good' },
     { id: 'l12-2', type: 'mcq', question: 'Match: "Kale"', options: ['Okay / Well then', 'Hello'], answer: 'Okay / Well then' },
-    { id: 'l12-3', type: 'mcq', question: 'Match: "Tuyambagane"', options: ['Let us help each other', 'Let us play'], answer: 'Tuyambagane' },
+    { id: 'l12-3', type: 'mcq', question: 'Match: "Tuyambagane"', options: ['Let us help each other', 'Let us play'], answer: 'Let us help each other' },
     { id: 'l12-4', type: 'mcq', question: 'Translate: "I understand"', options: ['Ntegeera', 'Mmanyi'], answer: 'Ntegeera' },
     { id: 'l12-5', type: 'mcq', question: 'Translate: "Perfect"', options: ['Kituufu ddala', 'Kirungi'], answer: 'Kituufu ddala' },
+
+    // Level 3: Unit 13 - Social Relationships
+    { id: 'l13-1', type: 'mcq', question: 'Translate: "They are my relatives"', options: ['Bano baluganda lwange', 'Bano mikwano gyange', 'Bano bakozi bange'], answer: 'Bano baluganda lwange' },
+    { id: 'l13-2', type: 'mcq', question: 'Match: "Obukwata"', options: ['Connection/Relation', 'Conflict', 'Distance'], answer: 'Connection/Relation' },
+    { id: 'l13-3', type: 'mcq', question: 'Translate: "We help each other always"', options: ['Tuyambagana bulijjo', 'Tuzina bulijjo', 'Tulya bulijjo'], answer: 'Tuyambagana bulijjo' },
+
+    // Level 3: Unit 14 - Culture & Tradition
+    { id: 'l14-1', type: 'mcq', question: 'Match: "Ennono y\'ekika"', options: ['Clan tradition', 'Modern dance', 'Office rules'], answer: 'Clan tradition' },
+    { id: 'l14-2', type: 'mcq', question: 'Translate: "Respecting the King is key"', options: ['Okuwa Kabaka ekitiibwa kikulu', 'Okuwa omuntu amenvu', 'Okuwa omwana ekitabo'], answer: 'Okuwa Kabaka ekitiibwa kikulu' },
+
+    // Level 3: Unit 15 - News & Society
+    { id: 'l15-1', type: 'mcq', question: 'Match: "Amawulire ag\'akawabula"', options: ['Latest news', 'Yesterday\'s stories', 'Fake news'], answer: 'Latest news' },
+    { id: 'l15-2', type: 'mcq', question: 'Translate: "The community is developing"', options: ['Ekitundu kikulaakulana', 'Ekitundu kifiiridde', 'Ekitundu kirungi'], answer: 'Ekitundu kikulaakulana' },
+
+    // Level 3: Unit 16 - Nature & Environment
+    { id: 'l16-1', type: 'mcq', question: 'Match: "Obubonero bw\'obutonde"', options: ['Natural signs', 'Artificial lights', 'Road signs'], answer: 'Natural signs' },
+    { id: 'l16-2', type: 'mcq', question: 'Translate: "Planting trees is good"', options: ['Okusimba emiti kirungi', 'Okulya emenvu kirungi', 'Okutambura kirungi'], answer: 'Okusimba emiti kirungi' },
+
+    // Level 4: Unit 17 - Mastery & Idioms
+    { id: 'l17-1', type: 'mcq', question: 'Match: "Akuba akasolo bwe kaba kadda"', options: ['Strike while the iron is hot (Wait for the right moment)', 'A small bird is fast', 'The sun is hot'], answer: 'Strike while the iron is hot (Wait for the right moment)' },
+    { id: 'l17-2', type: 'mcq', question: 'Translate: "Hurry results in no success"', options: ['Akwatira amangu taba na mulimu', 'Ekibi kiva ku mangu', 'Haraka haraka haina baraka (Swahili influence)', 'Okwanguyira tekuleeta bukugu'], answer: 'Okwanguyira tekuleeta bukugu' },
+
+    // Level 4: Unit 18 - Business & Formalities
+    { id: 'l18-1', type: 'mcq', question: 'Match: "Ebyenfuna"', options: ['Economics/Finance', 'Entertainment', 'Gardening'], answer: 'Economics/Finance' },
+    { id: 'l18-2', type: 'mcq', question: 'Translate: "We need a formal agreement"', options: ['Twetaaga endagaano entongole', 'Twetaaga emmere', 'Twetaaga sente'], answer: 'Twetaaga endagaano entongole' },
+
+    // Level 4: Unit 19 - History & Antiquity
+    { id: 'l19-1', type: 'mcq', question: 'Match: "Ebyafaayo bya Buganda"', options: ['History of Buganda', 'Future of Buganda', 'News about Buganda'], answer: 'History of Buganda' },
+    { id: 'l19-2', type: 'mcq', question: 'Translate: "Honoring our ancestors"', options: ['Okuwa bajjajjaffe ekitiibwa', 'Okulya hamwe', 'Okuzina'], answer: 'Okuwa bajjajjaffe ekitiibwa' },
+
+    // Level 4: Unit 20 - Philosophical Thought
+    { id: 'l20-1', type: 'mcq', question: 'Match: "Okufumiitiriza ku bulamu"', options: ['Reflecting on life', 'Eating food', 'Walking home'], answer: 'Reflecting on life' },
+    { id: 'l20-2', type: 'mcq', question: 'Translate: "Life is a journey"', options: ['Obulamu lugendo', 'Obulamu bulungi', 'Obulamu bubi'], answer: 'Obulamu lugendo' },
   ],
   German: [
     // Module 1: Greetings & Introductions
@@ -578,6 +710,38 @@ export const LESSON_BANKS: Record<string, LessonItem[]> = {
     { id: 'g12-3', type: 'mcq', question: 'Translate: "Ich beherrsche die Sprache"', options: ['I master the language', 'I speak the language', 'I learn the language'], answer: 'I master the language' },
     { id: 'g12-4', type: 'mcq', question: 'What is "Verständnis"?', options: ['Understanding', 'Agreement', 'Patience'], answer: 'Understanding' },
     { id: 'g12-5', type: 'mcq', question: 'Translate: "Ausgezeichnet"', options: ['Excellent', 'Good', 'Average'], answer: 'Excellent' },
+
+    // Level 3: Unit 13 - Gesellschaft
+    { id: 'g13-1', type: 'mcq', question: 'Translate: "The society is changing"', options: ['Die Gesellschaft verändert sich', 'Die Stadt ist groß', 'Das Wetter ist schön'], answer: 'Die Gesellschaft verändert sich' },
+    { id: 'g13-2', type: 'mcq', question: 'Match: "Verantwortung"', options: ['Responsibility', 'Freedom', 'Justice'], answer: 'Responsibility' },
+    
+    // Level 3: Unit 14 - Kultur
+    { id: 'g14-1', type: 'mcq', question: 'Match: "Kulturerbe"', options: ['Cultural heritage', 'Museum', 'Painting'], answer: 'Cultural heritage' },
+    { id: 'g14-2', type: 'mcq', question: 'Translate: "Traditions are important"', options: ['Traditionen sind wichtig', 'Essen ist gut', 'Musik ist laut'], answer: 'Traditionen sind wichtig' },
+    
+    // Level 3: Unit 15 - Nachrichten
+    { id: 'g15-1', type: 'mcq', question: 'Match: "Wirtschaft"', options: ['Economy', 'Politics', 'Sports'], answer: 'Economy' },
+    { id: 'g15-2', type: 'mcq', question: 'Translate: "The world news today"', options: ['Die Weltnachrichten heute', 'Das Radio spielt', 'Ich lese'], answer: 'Die Weltnachrichten heute' },
+
+    // Level 3: Unit 16 - Natur
+    { id: 'g16-1', type: 'mcq', question: 'Match: "Umweltschutz"', options: ['Environmental protection', 'Weather', 'Forest'], answer: 'Environmental protection' },
+    { id: 'g16-2', type: 'mcq', question: 'Translate: "Climate change is real"', options: ['Der Klimawandel ist real', 'Es regnet', 'Die Sonne scheint'], answer: 'Der Klimawandel ist real' },
+
+    // Level 4: Unit 17 - Redewendungen
+    { id: 'g17-1', type: 'mcq', question: 'Match: "Übung macht den Meister"', options: ['Practice makes perfect', 'All is well', 'Hurry makes waste'], answer: 'Practice makes perfect' },
+    { id: 'g17-2', type: 'mcq', question: 'Translate: "Ende gut, alles gut"', options: ['All\'s well that ends well', 'Good morning', 'Goodbye'], answer: 'All\'s well that ends well' },
+
+    // Level 4: Unit 18 - Beruf
+    { id: 'g18-1', type: 'mcq', question: 'Match: "Unternehmensführung"', options: ['Corporate management', 'Office work', 'Salary'], answer: 'Corporate management' },
+    { id: 'g18-2', type: 'mcq', question: 'Translate: "Wir brauchen eine neue Strategie"', options: ['Wir brauchen eine neue Strategie', 'Wir brauchen Zeit', 'Wir brauchen Geld'], answer: 'Wir brauchen eine neue Strategie' },
+
+    // Level 4: Unit 19 - Geschichte
+    { id: 'g19-1', type: 'mcq', question: 'Match: "Zeitgeschichte"', options: ['Contemporary history', 'Ancient times', 'Future'], answer: 'Contemporary history' },
+    { id: 'g19-2', type: 'mcq', question: 'Translate: "Die Geschichte wiederholt sich"', options: ['Die Geschichte wiederholt sich', 'Die Zeit vergeht', 'Das Leben ist kurz'], answer: 'Die Geschichte wiederholt sich' },
+
+    // Level 4: Unit 20 - Philosophie
+    { id: 'g20-1', type: 'mcq', question: 'Match: "Existenzialismus"', options: ['Existentialism', 'Idealism', 'Realism'], answer: 'Existentialism' },
+    { id: 'g20-2', type: 'mcq', question: 'Translate: "Wissen ist Macht"', options: ['Wissen ist Macht', 'Liebe ist alles', 'Zeit ist Geld'], answer: 'Wissen ist Macht' },
   ],
   French: [
     // Module 1: Greetings & Introductions
@@ -663,5 +827,37 @@ export const LESSON_BANKS: Record<string, LessonItem[]> = {
     { id: 'f12-3', type: 'mcq', question: 'Translate: "Je maîtrise la langue"', options: ['I master the language', 'I speak the language', 'I learn the language'], answer: 'I master the language' },
     { id: 'f12-4', type: 'mcq', question: 'What is "La compréhension"?', options: ['Understanding', 'Agreement', 'Patience'], answer: 'Understanding' },
     { id: 'f12-5', type: 'mcq', question: 'Translate: "Excellent"', options: ['Excellent', 'Bon', 'Moyen'], answer: 'Excellent' },
+
+    // Level 3: Unit 13 - Société
+    { id: 'f13-1', type: 'mcq', question: 'Translate: "La société est diverse"', options: ['La société est diverse', 'La ville est grande', 'Il fait beau'], answer: 'La société est diverse' },
+    { id: 'f13-2', type: 'mcq', question: 'Match: "Égalité"', options: ['Equality', 'Freedom', 'Justice'], answer: 'Equality' },
+
+    // Level 3: Unit 14 - Culture
+    { id: 'f14-1', type: 'mcq', question: 'Match: "Patrimoine"', options: ['Heritage', 'Museum', 'Art'], answer: 'Heritage' },
+    { id: 'f14-2', type: 'mcq', question: 'Translate: "La culture est essentielle"', options: ['La culture est essentielle', 'Le pain est bon', 'La musique est forte'], answer: 'La culture est essentielle' },
+
+    // Level 3: Unit 15 - Actualités
+    { id: 'f15-1', type: 'mcq', question: 'Match: "Mondialisation"', options: ['Globalization', 'Politics', 'Sports'], answer: 'Globalization' },
+    { id: 'f15-2', type: 'mcq', question: 'Translate: "Les actualités internationales"', options: ['Les actualités internationales', 'La radio', 'Le journal'], answer: 'Les actualités internationales' },
+
+    // Level 3: Unit 16 - Environnement
+    { id: 'f16-1', type: 'mcq', question: 'Match: "Développement durable"', options: ['Sustainable development', 'Nature', 'Forest'], answer: 'Sustainable development' },
+    { id: 'f16-2', type: 'mcq', question: 'Translate: "Préserver la biodiversité"', options: ['Préserver la biodiversité', 'Il pleut', 'Le soleil brille'], answer: 'Préserver la biodiversité' },
+
+    // Level 4: Unit 17 - Idiotismes
+    { id: 'f17-1', type: 'mcq', question: 'Match: "Petit à petit, l\'oiseau fait son nid"', options: ['Step by step, one goes far', 'Life is beautiful', 'Time is money'], answer: 'Step by step, one goes far' },
+    { id: 'f17-2', type: 'mcq', question: 'Translate: "Mieux vaut tard que jamais"', options: ['Mieux vaut tard que jamais', 'Bonjour', 'Au revoir'], answer: 'Mieux vaut tard que jamais' },
+
+    // Level 4: Unit 18 - Affaires
+    { id: 'f18-1', type: 'mcq', question: 'Match: "Entrepreneuriat"', options: ['Entrepreneurship', 'Office', 'Salary'], answer: 'Entrepreneurship' },
+    { id: 'f18-2', type: 'mcq', question: 'Translate: "Un marché compétitif"', options: ['Un marché compétitif', 'Un marché libre', 'Un marché fermé'], answer: 'Un marché compétitif' },
+
+    // Level 4: Unit 19 - Histoire
+    { id: 'f19-1', type: 'mcq', question: 'Match: "Ancien Régime"', options: ['Old Regime/Kingdom', 'Future', 'Today'], answer: 'Old Regime/Kingdom' },
+    { id: 'f19-2', type: 'mcq', question: 'Translate: "Liberté, Égalité, Fraternité"', options: ['Liberté, Égalité, Fraternité', 'Un pour tous', 'Vive la France'], answer: 'Liberté, Égalité, Fraternité' },
+
+    // Level 4: Unit 20 - Philosophie
+    { id: 'f20-1', type: 'mcq', question: 'Match: "Lumières"', options: ['Enlightenment', 'Sunlight', 'Darkness'], answer: 'Enlightenment' },
+    { id: 'f20-2', type: 'mcq', question: 'Translate: "Je pense, donc je suis"', options: ['Je pense, donc je suis', 'Je suis ici', 'C\'est la vie'], answer: 'Je pense, donc je suis' },
   ]
 }

@@ -95,7 +95,9 @@ function LessonContent() {
           'greetings': 1, 'time': 2, 'actions': 3,
           'questions': 4, 'conversations': 5, 'advanced': 6,
           'professional': 7, 'planning': 8, 'storytelling': 9,
-          'logic': 10, 'logistics': 11, 'fluency': 12
+          'logic': 10, 'logistics': 11, 'fluency': 12,
+          'social': 13, 'culture': 14, 'news': 15, 'nature': 16,
+          'idioms': 17, 'business': 18, 'history': 19, 'philosophical': 20
         }
         const order = numMap[moduleKey]
         if (order) {
