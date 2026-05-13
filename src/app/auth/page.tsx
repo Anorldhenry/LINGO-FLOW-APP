@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, LogIn, UserPlus, Loader2, Eye, EyeOff } from 'lucide-react'
@@ -18,9 +18,9 @@ export default function AuthPage() {
   const [isLoading, setIsLoading] = useState(false)
   
   // Prefetch dashboard for faster transition
-  useState(() => {
+  useEffect(() => {
     router.prefetch('/dashboard')
-  })
+  }, [router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
