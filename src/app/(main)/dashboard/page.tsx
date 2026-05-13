@@ -129,15 +129,15 @@ export default async function DashboardPage() {
           </div>
           <div className="flex items-center gap-6">
             
-            {/* Quick Course Switcher in Navbar */}
-            <div className="hidden lg:flex items-center gap-3 px-4 py-2 bg-surface-hover rounded-2xl border-2 border-border-color group transition-all hover:border-[#58CC02]/30">
+            {/* Quick Course Switcher in Navbar - Adaptive */}
+            <div className="hidden sm:flex items-center gap-3 px-3 lg:px-4 py-2 bg-surface-hover rounded-2xl border-2 border-border-color group transition-all hover:border-[#58CC02]/30">
               <div className="flex flex-col">
-                <span className="text-[10px] font-bold text-bold uppercase tracking-widest leading-none mb-1">Learning</span>
-                <span className="text-sm font-extrabold text-foreground leading-none flex items-center gap-1.5">{currentLangObj.flag} {profile.target_language}</span>
+                <span className="hidden lg:block text-[10px] font-bold text-bold uppercase tracking-widest leading-none mb-1">Learning</span>
+                <span className="text-xs lg:text-sm font-extrabold text-foreground leading-none flex items-center gap-1.5">{currentLangObj.flag} <span className="hidden md:inline">{profile.target_language}</span></span>
               </div>
               <Link 
                 href="/setup?source=navbar" 
-                className="ml-2 text-[10px] font-black uppercase tracking-widest text-[#58CC02] bg-surface px-2 py-1 rounded-lg border border-[#58CC02]/20 hover:bg-[#58CC02] hover:text-white transition-all shadow-sm"
+                className="ml-1 lg:ml-2 text-[10px] font-black uppercase tracking-widest text-[#58CC02] bg-surface px-1.5 lg:px-2 py-1 rounded-lg border border-[#58CC02]/20 hover:bg-[#58CC02] hover:text-white transition-all shadow-sm"
               >
                 Change
               </Link>
@@ -154,9 +154,9 @@ export default async function DashboardPage() {
               </div>
             </div>
 
-            <div className="flex items-center gap-4 border-l-2 border-border-color pl-6">
+            <div className="flex items-center gap-2 sm:gap-4 border-l-2 border-border-color pl-3 sm:pl-6">
               <ThemeToggle />
-              <div className="bg-[#58CC02] h-8 w-8 rounded-full flex items-center justify-center text-white font-bold shadow-sm ring-2 ring-surface">
+              <div className="bg-[#58CC02] h-8 w-8 sm:h-9 sm:w-9 rounded-full flex items-center justify-center text-white text-sm sm:text-base font-bold shadow-sm ring-2 ring-surface cursor-pointer hover:scale-105 transition-transform">
                 {profile.full_name.charAt(0).toUpperCase()}
               </div>
             </div>
@@ -172,19 +172,19 @@ export default async function DashboardPage() {
           
           {/* Resume Progress Card */}
           {profile.last_lesson_lang && (
-            <div className="bg-surface p-5 rounded-[32px] border-2 border-[#58CC02] shadow-sm flex items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-500">
-               <div className="flex items-center gap-4">
+            <div className="bg-surface p-4 sm:p-5 rounded-3xl sm:rounded-[32px] border-2 border-[#58CC02] shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-500 text-center sm:text-left">
+               <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
                   <div className="bg-info-bg p-3 rounded-2xl">
-                     <Trophy className="h-8 w-8 text-[#58CC02]" />
+                     <Trophy className="h-6 w-6 sm:h-8 sm:w-8 text-[#58CC02]" />
                   </div>
                   <div>
-                     <h3 className="font-extrabold text-foreground">Pick up where you left off!</h3>
-                     <p className="text-sm text-bold font-medium">Continuing: {profile.last_lesson_module || 'General'} in {profile.last_lesson_lang}</p>
+                     <h3 className="font-extrabold text-foreground text-sm sm:text-base">Pick up where you left off!</h3>
+                     <p className="text-xs sm:text-sm text-bold font-medium opacity-80">Continuing: {profile.last_lesson_module || 'General'} in {profile.last_lesson_lang}</p>
                   </div>
                </div>
                <Link 
                 href={`/lesson?lang=${profile.last_lesson_lang}${profile.last_lesson_module ? `&module=${profile.last_lesson_module}` : ''}&resume=true`}
-                className="whitespace-nowrap uppercase tracking-widest text-xs font-bold bg-[#58CC02] text-white hover:bg-[#357B00] px-6 py-3 rounded-xl border-b-4 border-[#357B00] active:border-b-0 active:translate-y-1 transition-all"
+                className="w-full sm:w-auto py-3 px-8 uppercase tracking-widest text-xs font-bold bg-[#58CC02] text-white hover:bg-[#357B00] rounded-xl border-b-4 border-[#357B00] active:border-b-0 active:translate-y-1 transition-all"
                >
                  Resume
                </Link>
@@ -192,9 +192,9 @@ export default async function DashboardPage() {
           )}
 
           <div 
-             className="bg-[#58CC02] p-6 rounded-[48px] border-b-[6px] border-[#46A302] text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm overflow-hidden relative"
+             className="bg-[#58CC02] p-5 sm:p-8 rounded-[36px] sm:rounded-[48px] border-b-[6px] border-[#46A302] text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm overflow-hidden relative text-center md:text-left"
           >
-            <div className="flex flex-col md:flex-row items-center gap-6 z-10">
+            <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-6 z-10">
               {/* Lingo Baby Mascot Welcome - Polished */}
               <div className="w-20 h-20 md:w-28 md:h-28 flex-shrink-0 animate-float">
                 <img 
@@ -204,24 +204,24 @@ export default async function DashboardPage() {
                 />
               </div>
               
-              <div>
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/20 rounded-xl text-sm font-bold border-2 border-white/20">
-                    <CheckCircle2 className="h-4 w-4" /> Learning {currentLangObj.flag} {profile.target_language}
+              <div className="flex flex-col items-center md:items-start">
+                <div className="flex flex-wrap justify-center md:justify-start items-center gap-2 mb-3">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/20 rounded-xl text-[10px] sm:text-xs font-bold border-2 border-white/20">
+                    <CheckCircle2 className="h-3 w-3 sm:h-4 sm:w-4" /> Learning {currentLangObj.flag} {profile.target_language}
                   </div>
                   {profile.subscription_tier && profile.subscription_tier !== 'free' && (
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-xl text-sm font-black border-2 border-yellow-300 shadow-sm animate-pulse-slow">
-                      <Sparkles className="h-4 w-4" /> PRO
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-xl text-[10px] sm:text-xs font-black border-2 border-yellow-300 shadow-sm animate-pulse-slow">
+                      <Sparkles className="h-3 w-3 sm:h-4 sm:w-4" /> PRO
                     </div>
                   )}
                 </div>
-                <h2 className="text-2xl font-extrabold mb-1">Welcome, {profile.full_name}!</h2>
-                <p className="font-medium opacity-90">Ready to crush your daily goals?</p>
+                <h2 className="text-xl sm:text-2xl font-extrabold mb-1">Welcome, {profile.full_name}!</h2>
+                <p className="text-sm font-medium opacity-90">Ready to crush your daily goals?</p>
               </div>
             </div>
             <Link 
               href={`/lesson?lang=${profile.target_language}&module=${activeModuleId}`} 
-              className="whitespace-nowrap uppercase tracking-widest text-sm font-bold bg-surface text-[#58CC02] hover:bg-surface-hover px-8 py-4 rounded-2xl border-b-4 border-border-color active:border-b-0 active:translate-y-1 transition-all shadow-sm z-10"
+              className="w-full md:w-auto uppercase tracking-widest text-xs sm:text-sm font-bold bg-surface text-[#58CC02] hover:bg-surface-hover px-8 py-4 rounded-2xl border-b-4 border-border-color active:border-b-0 active:translate-y-1 transition-all shadow-sm z-10"
             >
               Continue: {modulesList[activeIndex].name}
             </Link>

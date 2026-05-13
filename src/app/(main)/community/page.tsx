@@ -72,27 +72,27 @@ function CommunityContent() {
           </div>
           <div className="flex items-center gap-2 px-4 py-1.5 bg-success-bg rounded-xl border border-[#58CC02]/20">
              <Globe className="h-4 w-4 text-[#58CC02]" />
-             <span className="text-xs font-black text-[#58CC02] uppercase tracking-widest flex items-center gap-1.5">{currentLangObj.flag} {currentLang} Hub</span>
+             <span className="text-[10px] sm:text-xs font-black text-[#58CC02] uppercase tracking-widest flex items-center gap-1.5">{currentLangObj.flag} <span className="hidden sm:inline">{currentLang}</span> Hub</span>
           </div>
         </div>
       </header>
 
       <main className="max-w-2xl mx-auto px-6 pt-24">
         
-        {/* Welcome Section */}
-        <div className="mb-8 flex items-center justify-between gap-6 bg-[#58CC02] border-b-[6px] border-[#46A302] p-8 rounded-[32px] text-white shadow-sm relative overflow-hidden group">
+        {/* Welcome Section - Responsive */}
+        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row items-center justify-between gap-6 bg-[#58CC02] border-b-[6px] border-[#46A302] p-6 sm:p-8 rounded-[28px] sm:rounded-[32px] text-white shadow-sm relative overflow-hidden group text-center sm:text-left">
            <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:scale-110 transition-transform duration-700">
-              <Users className="h-32 w-32" />
+              <Users className="h-24 w-24 sm:h-32 sm:w-32" />
            </div>
-           <div className="z-10">
-              <h2 className="text-3xl font-black mb-2 italic">Connect & Practice</h2>
-              <p className="font-bold opacity-90 max-w-sm leading-relaxed">Join the {currentLangObj.flag} {currentLang} conversation! Ask questions or share phrases to practice with other learners.</p>
+           <div className="z-10 relative">
+              <h2 className="text-2xl sm:text-3xl font-black mb-2 italic">Connect & Practice</h2>
+              <p className="text-sm sm:text-base font-bold opacity-90 max-w-sm leading-relaxed mx-auto sm:mx-0">Join the {currentLangObj.flag} {currentLang} conversation! Ask questions or share phrases to practice with other learners.</p>
            </div>
            <button 
             onClick={() => setShowModal(true)}
-            className="flex-shrink-0 w-16 h-16 bg-white text-[#58CC02] rounded-2xl flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all group-hover:rotate-12 border-b-4 border-gray-200 active:border-b-0 active:translate-y-1"
+            className="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 bg-white text-[#58CC02] rounded-2xl flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all group-hover:rotate-12 border-b-4 border-gray-200 active:border-b-0 active:translate-y-1"
            >
-              <Plus className="h-8 w-8 stroke-[3]" />
+              <Plus className="h-6 w-6 sm:h-8 sm:w-8 stroke-[3]" />
            </button>
         </div>
 

@@ -510,12 +510,12 @@ function LessonContent() {
       </div>
 
       <div className={`fixed bottom-0 left-0 right-0 border-t-2 z-50 transition-colors duration-300 ${feedback === 'correct' ? 'bg-success-bg border-success-bg' : feedback === 'incorrect' ? 'bg-error-bg border-error-bg' : 'bg-surface border-border-color'}`}>
-        <div className="max-w-4xl mx-auto px-4 py-4 md:py-6 flex items-center justify-between">
-          <div className="flex items-center gap-3 text-xl md:text-2xl font-extrabold">
-            {feedback === 'correct' && <><div className="h-12 w-12 bg-surface rounded-full flex items-center justify-center"><Check className="h-6 w-6 text-[#58CC02]" /></div><span className="text-[#58CC02]">Awesome!</span></>}
-            {feedback === 'incorrect' && <><div className="h-10 w-10 md:h-12 md:w-12 bg-surface rounded-full flex items-center justify-center"><XCircle className="h-5 w-5 md:h-6 md:w-6 text-[#EA2B2B]" /></div><div className="text-[#EA2B2B]"><div className="text-[10px] md:text-xs opacity-80 uppercase tracking-widest mb-1">Correct Answer:</div><div className="text-base md:text-lg">{currentItem?.answer}</div></div></>}
+        <div className="max-w-4xl mx-auto px-4 py-4 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3 text-lg sm:text-2xl font-extrabold w-full sm:w-auto">
+            {feedback === 'correct' && <><div className="h-10 w-10 sm:h-12 sm:w-12 bg-surface rounded-full flex items-center justify-center"><Check className="h-6 w-6 text-[#58CC02]" /></div><span className="text-[#58CC02]">Awesome!</span></>}
+            {feedback === 'incorrect' && <><div className="h-10 w-10 sm:h-12 sm:w-12 bg-surface rounded-full flex items-center justify-center flex-shrink-0"><XCircle className="h-5 w-5 sm:h-6 sm:w-6 text-[#EA2B2B]" /></div><div className="text-[#EA2B2B]"><div className="text-[9px] sm:text-xs opacity-80 uppercase tracking-widest mb-0.5">Correct Answer:</div><div className="text-sm sm:text-lg leading-tight">{currentItem?.answer}</div></div></>}
           </div>
-          <button onClick={handleCheck} disabled={!feedback && !selectedOption} className={`uppercase tracking-widest text-xs md:text-sm font-bold px-8 py-3 md:px-10 md:py-4 rounded-xl transition-all ${feedback === 'correct' ? 'bg-[#58CC02] text-white border-b-4 border-[#46A302]' : feedback === 'incorrect' ? 'bg-[#EA2B2B] text-white border-b-4 border-[#CC2020]' : !selectedOption ? 'bg-border-color text-bold' : 'bg-[#58CC02] text-white border-b-4 border-[#46A302]'}`}>
+          <button onClick={handleCheck} disabled={!feedback && !selectedOption} className={`w-full sm:w-auto uppercase tracking-widest text-[11px] sm:text-sm font-bold px-8 py-3.5 sm:px-10 sm:py-4 rounded-xl transition-all ${feedback === 'correct' ? 'bg-[#58CC02] text-white border-b-4 border-[#46A302]' : feedback === 'incorrect' ? 'bg-[#EA2B2B] text-white border-b-4 border-[#CC2020]' : !selectedOption ? 'bg-border-color text-bold' : 'bg-[#58CC02] text-white border-b-4 border-[#46A302]'}`}>
             {feedback ? 'Continue' : 'Check'}
           </button>
         </div>

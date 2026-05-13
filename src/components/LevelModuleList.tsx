@@ -33,7 +33,7 @@ export function LevelModuleList({ modulesList, profile, activeIndex, targetLevel
           <div key={mod.id} className="w-full flex flex-col items-center gap-6 relative group">
             <div className="w-full flex items-center gap-4 z-10 my-2">
               <div className="flex-1 h-0.5 bg-border-color/50"></div>
-              <div className={`text-[10px] font-black px-3 py-1 rounded-lg uppercase tracking-widest border-b-2
+              <div className={`text-[9px] sm:text-[10px] font-black px-2 sm:px-3 py-1 rounded-lg uppercase tracking-widest border-b-2
                 ${isLocked ? 'bg-border-b-color text-neutral-400 border-border-color' : isFinished ? 'bg-success-bg text-[#46A302] border-[#58CC02]' : 'bg-[#FFC800] text-yellow-900 border-[#CC9A00]'}`}>
                 {mod.unit}
               </div>
@@ -42,28 +42,28 @@ export function LevelModuleList({ modulesList, profile, activeIndex, targetLevel
 
             <div className="flex flex-col items-center gap-3 relative w-full group">
               {isLocked ? (
-                <div className="w-20 h-20 rounded-full border-b-8 flex items-center justify-center shadow-md relative z-10 grayscale opacity-50 bg-neutral-300 text-muted">
-                  <span className="text-3xl">{mod.icon}</span>
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-b-[6px] sm:border-b-8 flex items-center justify-center shadow-md relative z-10 grayscale opacity-50 bg-neutral-300 text-muted">
+                  <span className="text-2xl sm:text-3xl">{mod.icon}</span>
                   {!isOnline && connectionRequired && !serverLocked && (
-                    <div className="absolute -right-2 top-0 bg-red-400 rounded-full p-1.5 border-4 border-surface shadow-sm" title="Online Required">
-                      <WifiOff className="h-4 w-4 text-white" />
+                    <div className="absolute -right-1 sm:-right-2 top-0 bg-red-400 rounded-full p-1 sm:p-1.5 border-4 border-surface shadow-sm" title="Online Required">
+                      <WifiOff className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
                     </div>
                   )}
                 </div>
               ) : (
                 <Link 
                   href={`/lesson?lang=${profile.target_language}&module=${mod.id}`}
-                  className={`w-20 h-20 rounded-full border-b-8 flex items-center justify-center transform transition-all cursor-pointer shadow-md relative z-10 hover:-translate-y-1 
+                  className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full border-b-[6px] sm:border-b-8 flex items-center justify-center transform transition-all cursor-pointer shadow-md relative z-10 hover:-translate-y-1 
                     ${isFinished ? 'animate-pulse-slow ring-4 ring-[#58CC02]/20' : 'ring-4 ring-transparent hover:ring-white/20'}`}
                   style={{ 
                     backgroundColor: isFinished ? '#58CC02' : mod.color, 
                     borderColor: isFinished ? '#46A302' : mod.border 
                   }}
                 >
-                  <span className="text-3xl group-hover:scale-110 transition-transform">{mod.icon}</span>
+                  <span className="text-2xl sm:text-3xl group-hover:scale-110 transition-transform">{mod.icon}</span>
                   {isFinished && (
-                    <div className="absolute -right-2 top-0 bg-[#58CC02] rounded-full p-1.5 border-4 border-surface shadow-sm animate-in zoom-in duration-300">
-                      <CheckCircle2 className="h-4 w-4 text-white" />
+                    <div className="absolute -right-1 sm:-right-2 top-0 bg-[#58CC02] rounded-full p-1 sm:p-1.5 border-4 border-surface shadow-sm animate-in zoom-in duration-300">
+                      <CheckCircle2 className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
                     </div>
                   )}
                 </Link>

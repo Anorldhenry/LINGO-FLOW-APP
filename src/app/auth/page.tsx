@@ -82,15 +82,15 @@ export default function AuthPage() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex items-center justify-center p-6">
-        <div className="w-full max-w-md bg-surface rounded-[48px] p-8 shadow-sm border-2 border-border-color">
+      <main className="flex-1 flex items-center justify-center p-4 sm:p-6">
+        <div className="w-full max-w-md bg-surface rounded-[32px] sm:rounded-[48px] p-6 sm:p-8 shadow-sm border-2 border-border-color">
           
-          <div className="mb-8 text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 mb-4 transition-transform hover:scale-110">
+          <div className="mb-6 sm:mb-8 text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 mb-4 transition-transform hover:scale-110">
                <img src="/assets/logo-transparent.png" className="w-full h-full object-contain" alt="Lingo Flow" />
             </div>
-            <h1 className="text-3xl font-extrabold text-foreground mb-2">{isLogin ? 'Welcome Back' : 'Create Account'}</h1>
-            <p className="text-bold font-bold">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-foreground mb-2">{isLogin ? 'Welcome Back' : 'Create Account'}</h1>
+            <p className="text-xs sm:text-sm text-bold font-bold uppercase tracking-wider">
               {isLogin ? 'Sign in with your username' : 'Pick a username and password'}
             </p>
           </div>
