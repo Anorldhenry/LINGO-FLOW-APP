@@ -523,7 +523,7 @@ export const LESSON_BANKS: Record<string, LessonItem[]> = {
     { id: 'l4-5', type: 'mcq', question: 'Translate: "Why?"', options: ['Lwaki?', 'Ki?', 'Wa?'], answer: 'Lwaki?' },
     { id: 'l4-6', type: 'mcq', question: 'Fill in the blank: "______ ogenda?" (Where are you going?)', options: ['Wa', 'Ddi', 'Ani'], answer: 'Wa' },
     { id: 'l4-7', type: 'mcq', question: 'Translate: "How much?"', options: ['Meka?', 'Wa?', 'Ki?'], answer: 'Meka?' },
-    { id: 'l4-8', type: 'mcq', question: 'Rearrange: ogenda / Wa', options: ['Wa ogenda?', 'ogenda Wa?', 'Wa ki?'], answer: 'Wa ogenda?' },
+    { id: 'l4-8', type: 'mcq', question: 'Rearrange: ogenda / Wa', options: ['Wa ogenda?', 'ogenda Wa?', 'Wa ki?'], answer: 'ogenda Wa?' },
     { id: 'l4-9', type: 'mcq', question: 'Translate: "What is your name?"', options: ['Erinnya lyo ggwe ani?', 'Ogenda wa?', 'Okola ki?'], answer: 'Erinnya lyo ggwe ani?' },
     { id: 'l4-10', type: 'mcq', question: 'Match: "Okola ki?"', options: ['What are you doing?', 'Where are you?', 'Who are you?'], answer: 'What are you doing?' },
 
